@@ -97,13 +97,10 @@ cmake --build build-debug -j
 **Mahdi Tavakol**  
 _Postdoctoral Researcher • Computational Scientist_  
 <p>
-  📧 <a href="mailto:mahdi&#46;tavakol&#64;eng&#46;ox&#46;ac&#46;uk">
-    mahdi&#8203;.tavakol&#8203;&#64;&#8203;eng&#8203;&#46;&#8203;ox&#8203;&#46;&#8203;ac&#8203;&#46;&#8203;uk
-  </a><br/>
-  📧 <a href="mailto:mahditavakol90&#64;gmail&#46;com">
-    mahditavakol90&#8203;&#64;&#8203;gmail&#8203;&#46;&#8203;com
-  </a>
+  📧 <strong>mahdi&#8203;.tavakol &#91;at&#93; eng &#91;dot&#93; ox &#91;dot&#93; ac &#91;dot&#93; uk</strong><br/>
+  📧 <strong>mahditavakol90 &#91;at&#93; gmail &#91;dot&#93; com</strong>
 </p>
+
 
 
 I’m keen to bring my **C**, **modern C++ engineering**, **CUDA C** and **numerical simulation** experience  
