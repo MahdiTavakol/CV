@@ -133,6 +133,7 @@ cmake --build build -j
 # Example: Debug build with symbols
 cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build build-debug -j
+```
 
 
 
