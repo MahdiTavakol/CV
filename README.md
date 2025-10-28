@@ -107,7 +107,6 @@ _Postdoctoral Researcher • Computational Scientist_
 
 I’m keen to bring my **C**, **modern C++ engineering**, **CUDA C** and **numerical simulation** experience  
 to **software** development roles.
-</div>
 
 ---
 
@@ -115,3 +114,4 @@ to **software** development roles.
 
 📄 If PDFs don’t preview in your browser, download them locally.  
 ⚙️ Some projects use **C++20+** features; see each repository for build details.
+</div>
