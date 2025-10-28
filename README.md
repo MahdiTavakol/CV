@@ -33,7 +33,7 @@
 
 ## 🧩 About
 
-This repository contains my latest **CV** and **C++ portfolio slides** prepared for the **Capgemini Engineering — Software Engineer (GNC)** interview (2025).  
+This repository contains my latest **CV** and **C++ portfolio slides**.  
 It showcases my engineering approach to **high-performance numerical software** in C++ (C++17/20), with emphasis on **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
 
 ---
@@ -47,7 +47,7 @@ It showcases my engineering approach to **high-performance numerical software** 
 | `C++-Overview.pptx` | Portfolio slides (editable PowerPoint) |
 | `C++-Overview.pdf` | Portfolio slides (quick view, PDF) |
 
-> Tip: Prefer the PPTX for interviews so you can toggle and annotate live.
+> .
 
 ---
 
