@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</title>
+<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science • Portfolio of Mahdi Tavakol" />
+<style>
+  :root{
+    --bg:#0a0b10; --text:#e8ecf2; --muted:#a9b4c2; --border:#222634;
+    --panel:#10121a; --card:#121624; --link:#8ab4ff;
+    --accent:#7c3aed; --accent2:#60a5fa; --good:#10b981; --warn:#f59e0b;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#ffffff; --text:#0f172a; --muted:#465366; --border:#e5e7eb; --panel:#f7f8fa; --card:#ffffff; --link:#1d4ed8; }
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica Neue,Arial; }
+  html{ scroll-behavior:smooth; }
+
+  /* ====== NAV ====== */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(8px);
+    background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.08));
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav{
+    max-width:1200px; margin:0 auto; padding:10px 16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .brand{ font-weight:800; letter-spacing:.3px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); }
+  .nav a{ color:var(--muted); text-decoration:none; font-weight:600; font-size:14px; padding:8px 10px; border-radius:8px; }
+  .nav a:hover{ color:var(--text); background:rgba(255,255,255,.06); }
+  .spacer{ flex:1; }
+
+  /* ====== HERO (parallax layers) ====== */
+  .hero{
+    position:relative; height:100svh; overflow:hidden;
+    display:grid; place-items:center;
+    border-bottom:1px solid var(--border);
+  }
+  .layer{
+    position:absolute; inset:0; background-position:center; background-size:cover; will-change:transform; pointer-events:none; opacity:.28;
+  }
+  /* Replace these gradient layers with subtle textures or photos if you want */
+  .l1{ background-image:radial-gradient(1000px 600px at 10% 20%, #3b82f6 0%, transparent 60%); }
+  .l2{ background-image:radial-gradient(800px 500px at 80% 10%, #a78bfa 0%, transparent 60%); mix-blend-mode:screen; }
+  .l3{ background-image:radial-gradient(900px 700px at 50% 80%, #10b981 0%, transparent 65%); mix-blend-mode:screen; }
+
+  .hero-inner{
+    position:relative; text-align:center; padding:0 16px; z-index:2;
+    max-width:1000px;
+  }
+  .title{ font-size:clamp(28px,5vw,54px); margin:0 0 8px; letter-spacing:.2px; }
+  .subtitle{ margin:0 0 18px; color:var(--muted); font-size:clamp(14px,2vw,18px); }
+
+  .label{
+    display:inline-block; margin: 8px 0 8px; padding: 4px 10px;
+    font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:999px;
+    background:rgba(0,0,0,.2);
+  }
+  .badges{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .badge-img img{ height:28px; display:block; }
+
+  /* Distinct pill buttons (profiles / about me) */
+  .row{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:10px 0 0; }
+  .pill{
+    display:inline-flex; align-items:center; gap:10px; padding:10px 14px;
+    border-radius:999px; border:1px solid var(--border); text-decoration:none; color:#fff;
+    box-shadow:0 6px 20px rgba(0,0,0,.25); font-weight:800; font-size:14px; letter-spacing:.2px;
+    transition:transform 140ms ease, filter 140ms ease;
+  }
+  .pill:hover{ transform:translateY(-1px); filter:brightness(1.07); text-decoration:none; }
+  .ln{ background:linear-gradient(135deg,#0A66C2,#2E8AE6); }
+  .gh{ background:linear-gradient(135deg,#111,#2a2a2a); }
+  .kg{ background:linear-gradient(135deg,#20BEFF,#55D0FF); color:#0b2b40; }
+  .cv{ background:linear-gradient(135deg,#0F766E,#34D399); }
+  .acv{ background:linear-gradient(135deg,#2563EB,#60A5FA); }
+  .slides{ background:linear-gradient(135deg,#7C3AED,#A78BFA); }
+  .pptx{ background:linear-gradient(135deg,#D35230,#E07B5D); }
+  .tag{ font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.18); }
+
+  .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.8; }
+
+  /* ====== SECTION WRAPPER ====== */
+  section.block{ padding:64px 16px; border-bottom:1px solid var(--border); }
+  .container{ max-width:1200px; margin:0 auto; }
+  .h2{ font-size:22px; margin:0 0 10px; }
+  .lead{ color:var(--muted); margin:0 0 18px; }
+
+  /* ====== REVEAL ANIMATIONS ====== */
+  .reveal{ opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.show{ opacity:1; transform:none; }
+
+  /* ====== DRAG GALLERY (ATS-like feel) ====== */
+  .gallery{
+    user-select:none; -webkit-user-select:none; -ms-user-select:none;
+    overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--panel);
+  }
+  .track{
+    display:flex; gap:10px; padding:12px; cursor:grab;
+    will-change:transform;
+  }
+  .track.dragging{ cursor:grabbing; }
+  .card-img{
+    flex:0 0 auto; width: clamp(260px, 36vw, 520px); aspect-ratio: 16/9;
+    border-radius:12px; overflow:hidden; background:var(--card); border:1px solid var(--border);
+    position:relative; transform:translateZ(0);
+  }
+  .card-img img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:contrast(1.03) saturate(1.03);
+    transition:transform .3s ease, filter .3s ease;
+  }
+  .card-img:hover img{ transform:scale(1.03); }
+
+  /* ====== GRID ====== */
+  .grid{ display:grid; gap:12px; }
+  @media (min-width:850px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px;
+  }
+  .card h3{ margin:0 0 6px; font-size:16px; }
+  .card p{ margin:0; color:var(--muted); font-size:14px; }
+  .btn{ display:inline-block; margin-top:8px; font-size:13px; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
+
+  footer{ padding:28px 16px 40px; text-align:center; color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="brand">Mahdi Tavakol</div>
+    <div class="spacer"></div>
+    <a href="#stack">Stack</a>
+    <a href="#gallery">Showcase</a>
+    <a href="#repos">Projects</a>
+    <a href="#kaggle">Python</a>
+    <a href="#aboutme">About me</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ====== HERO with parallax ====== -->
+<section class="hero" id="home" aria-label="hero">
+  <div class="layer l1" data-depth="0.15"></div>
+  <div class="layer l2" data-depth="0.30"></div>
+  <div class="layer l3" data-depth="0.50"></div>
+
+  <div class="hero-inner">
+    <h1 class="title">🧭 Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</h1>
+    <p class="subtitle"><strong>Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Linux Toolchains</strong></p>
+
+    <div class="label">Tech stack</div>
+    <div class="badges">
+      <a href="https://en.cppreference.com/w/" target="_blank" class="badge-img"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=for-the-badge"></a>
+      <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
+      <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
+      <a href="https://www.mpi-forum.org/" target="_blank" class="badge-img"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=for-the-badge"></a>
+      <a href="https://developer.nvidia.com/cuda-zone" target="_blank" class="badge-img"><img alt="CUDA" src="https://img.shields.io/badge/CUDA-GPU%20Computing-76B900?logo=nvidia&logoColor=white&style=for-the-badge"></a>
+      <a href="https://cmake.org/" target="_blank" class="badge-img"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=for-the-badge"></a>
+      <a href="https://www.kernel.org/linux.html" target="_blank" class="badge-img"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=for-the-badge"></a>
+    </div>
+
+    <div class="label">My profiles</div>
+    <div class="row">
+      <a class="pill ln" href="https://www.linkedin.com/in/mahditavakol/" target="_blank">🔗 LinkedIn <span class="tag">My profile</span></a>
+      <a class="pill gh" href="https://github.com/MahdiTavakol" target="_blank">🐙 GitHub <span class="tag">My profile</span></a>
+      <a class="pill kg" href="https://www.kaggle.com/mahditavakol/code" target="_blank">🧪 Kaggle <span class="tag">My notebooks</span></a>
+    </div>
+
+    <div class="label">About me</div>
+    <div class="row">
+      <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
+      <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
+      <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
+      <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">Scroll ↓ Drag the gallery</div>
+</section>
+
+<!-- ====== SHOWCASE: Drag-to-scroll Gallery ====== -->
+<section class="block" id="gallery" aria-label="showcase">
+  <div class="container">
+    <h2 class="h2 reveal">🖼️ Interactive Showcase</h2>
+    <p class="lead reveal">Click and drag (or swipe) to browse featured visuals — code snapshots, slides, or project images.</p>
+
+    <div class="gallery reveal">
+      <div class="track" id="dragTrack">
+        <!-- Replace image src with your own assets -->
+        <a class="card-img" href="C++-Overview.pdf" target="_blank" title="Portfolio Slides">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Code & terminal">
+        </a>
+        <a class="card-img" href="https://github.com/MahdiTavakol/ModernCppProjects" target="_blank" title="Modern C++ Projects">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Editor">
+        </a>
+        <a class="card-img" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH" target="_blank" title="LAMMPS Constant-pH">
+          <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
+        </a>
+        <a class="card-img" href="https://www.kaggle.com/mahditavakol/code" target="_blank" title="Kaggle Notebooks">
+          <img src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
+        </a>
+        <a class="card-img" href="C++-Overview.pptx" target="_blank" title="Slides PPTX">
+          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROJECTS ====== -->
+<section class="block" id="repos" aria-label="projects">
+  <div class="container">
+    <h2 class="h2 reveal">🗂 Featured Repositories</h2>
+    <div class="grid">
+      <div class="card reveal">
+        <h3>🌀 ModernCppProjects</h3>
+        <p>C++ projects demonstrating architecture, parallelism, and performance (e.g., Mandelbrot renderer).</p>
+        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects">View repository</a>
+      </div>
+      <div class="card reveal">
+        <h3>🧪 LAMMPS-Constant-pH</h3>
+        <p>C++ extensions for constant-pH MD with robust HPC integration.</p>
+        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH">View repository</a>
+      </div>
+      <div class="card reveal">
+        <h3>⛰️ MetaDynamics / TI</h3>
+        <p>Adaptive biasing and thermodynamic integration methods.</p>
+        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025">View repository</a>
+      </div>
+      <div class="card reveal">
+        <h3>🧠 NeuralNetwork (C++)</h3>
+        <p>Eigen-powered neural network with RAII and OpenMP/MPI acceleration.</p>
+        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects/tree/master/NeuralNetwork/NeuralNetwork">View subfolder</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PYTHON / KAGGLE ====== -->
+<section class="block" id="kaggle" aria-label="python">
+  <div class="container">
+    <h2 class="h2 reveal">🐍 Python & Kaggle</h2>
+    <p class="lead reveal">I also publish Python notebooks for data analysis and ML on Kaggle.</p>
+    <div class="row reveal">
+      <a class="pill kg" href="https://www.kaggle.com/mahditavakol/code" target="_blank">🧪 Kaggle <span class="tag">My notebooks</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ME (buttons duplicated) ====== -->
+<section class="block" id="aboutme" aria-label="about-me">
+  <div class="container">
+    <h2 class="h2 reveal">📄 About me</h2>
+    <p class="lead reveal">CVs and slide deck for quick review.</p>
+    <div class="row reveal">
+      <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
+      <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
+      <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
+      <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<section class="block" id="contact" aria-label="contact">
+  <div class="container">
+    <h2 class="h2 reveal">🗣️ Contact</h2>
+    <p class="lead reveal"><strong>Mahdi Tavakol</strong> — Postdoctoral Researcher • Computational Scientist</p>
+    <p class="lead reveal">Email: mahditavakol90 [at] gmail [dot] com</p>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Mahdi Tavakol • <a href="https://github.com/MahdiTavakol" target="_blank" style="color:inherit">GitHub</a> • <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank" style="color:inherit">LinkedIn</a>
+</footer>
+
+<script>
+  // ===== Parallax on scroll (lightweight)
+  const layers = document.querySelectorAll('.layer');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function parallax(){
+    if (prefersReduced) return;
+    const y = window.scrollY || window.pageYOffset;
+    layers.forEach(el=>{
+      const depth = parseFloat(el.dataset.depth || 0.2);
+      el.style.transform = `translateY(${y * depth * -0.25}px)`;
+    });
+    requestAnimationFrame(()=>{ /* noop to keep smoothness */ });
+  }
+  window.addEventListener('scroll', parallax, {passive:true});
+
+  // ===== Reveal on intersection
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('show'); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ===== Drag-to-scroll gallery (mouse & touch)
+  (function(){
+    const track = document.getElementById('dragTrack');
+    if(!track) return;
+    let isDown=false, startX=0, scrollLeft=0, vel=0, raf=null, lastX=0, lastT=0;
+
+    const stopMomentum = ()=>{ if(raf){ cancelAnimationFrame(raf); raf=null; } };
+    const momentum = ()=>{
+      track.scrollLeft -= vel;
+      vel *= 0.95;
+      if(Math.abs(vel) > 0.3){ raf = requestAnimationFrame(momentum); }
+      else { raf=null; }
+    };
+
+    const onDown = (x)=>{ isDown=true; track.classList.add('dragging'); startX=x; scrollLeft=track.scrollLeft; stopMomentum(); lastX=x; lastT=performance.now(); };
+    const onMove = (x)=>{
+      if(!isDown) return;
+      const now = performance.now();
+      const walk = (x - startX);
+      track.scrollLeft = scrollLeft - walk;
+      vel = (x - lastX) / (now - lastT) * 16; // px per frame approx
+      lastX = x; lastT = now;
+    };
+    const onUp = ()=>{
+      if(!isDown) return;
+      isDown=false; track.classList.remove('dragging');
+      stopMomentum(); momentum();
+    };
+
+    // Mouse
+    track.addEventListener('mousedown',(e)=>onDown(e.pageX));
+    window.addEventListener('mousemove',(e)=>onMove(e.pageX));
+    window.addEventListener('mouseup',onUp);
+
+    // Touch
+    track.addEventListener('touchstart',(e)=>onDown(e.touches[0].pageX), {passive:true});
+    window.addEventListener('touchmove',(e)=>onMove(e.touches[0].pageX), {passive:true});
+    window.addEventListener('touchend',onUp);
+  })();
+
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
