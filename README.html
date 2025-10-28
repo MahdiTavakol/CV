@@ -11,14 +11,12 @@
       --panel: #121316;
       --text: #eaeef2;
       --muted: #b6bec9;
-      --brand: #60a5fa;
-      --accent: #a78bfa;
       --card: #15171b;
       --border: #262a33;
       --link: #93c5fd;
     }
     @media (prefers-color-scheme: light) {
-      :root { --bg:#ffffff; --panel:#f7f8fa; --text:#0f172a; --muted:#465366; --brand:#2563eb; --accent:#7c3aed; --card:#ffffff; --border:#e5e7eb; --link:#1d4ed8; }
+      :root { --bg:#ffffff; --panel:#f7f8fa; --text:#0f172a; --muted:#465366; --card:#ffffff; --border:#e5e7eb; --link:#1d4ed8; }
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -30,35 +28,48 @@
     }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 8px 20px; }
+
+    /* FULL-WIDTH LAYOUT */
+    .container { width: 100%; max-width: none; margin: 0 auto; padding: 0 10px; }
+
     header {
       position: sticky; top: 0; z-index: 40;
       background: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,0));
       backdrop-filter: blur(6px);
     }
-    .nav { display:flex; gap:12px; align-items:center; padding:10px 20px; border-bottom:1px solid var(--border); background: rgba(0,0,0,0.25); }
+    .nav {
+      display:flex; gap:12px; align-items:center;
+      padding:10px 12px; border-bottom:1px solid var(--border);
+      background: rgba(0,0,0,0.25);
+    }
     .nav a { font-size: 14px; font-weight: 600; color: var(--muted); }
     .nav a:hover { color: var(--text); }
 
     .hero { padding: 22px 0 12px; text-align:center; }
-    .hero h1 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 28px); letter-spacing: .2px; }
+    .hero h1 { margin: 0 0 6px; font-size: clamp(20px, 3vw, 32px); letter-spacing: .2px; }
     .hero p { margin: 4px 0 12px; color: var(--muted); font-size: 14px; }
 
     .badges { display:flex; flex-wrap: wrap; gap:6px 8px; justify-content:center; align-items:center; margin: 6px 0 12px; }
     .badge-img { display:inline-block; vertical-align: middle; }
 
-    .section { margin: 18px 0 10px; padding: 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; }
+    .section { margin: 14px 0 10px; padding: 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; }
     .section h2 { margin: 0 0 10px; font-size: 18px; }
 
-    .grid { display:grid; grid-template-columns: 1fr; gap: 12px; }
-    @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    .grid { display:grid; grid-template-columns: repeat(1, minmax(0,1fr)); gap: 12px; }
+    @media (min-width: 720px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 
     .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
     .card h3 { margin: 0 0 6px; font-size: 16px; }
     .card p { margin: 0; font-size: 14px; color: var(--muted); }
-    .card a.btn { display:inline-block; margin-top: 8px; font-size: 13px; padding: 6px 10px; border-radius: 8px; border:1px solid var(--border); background: #0f172a22; }
+    .btn { display:inline-block; margin-top: 8px; font-size: 13px; padding: 6px 10px; border-radius: 8px; border:1px solid var(--border); background: #0f172a22; }
 
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; color: var(--muted); background: #00000020; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; overflow:auto; }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px; color: var(--muted);
+      background: #00000020; border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 10px; overflow:auto;
+    }
 
     footer { margin: 24px 0 40px; text-align:center; color: var(--muted); font-size: 13px; }
     .pill { display:inline-block; border:1px solid var(--border); padding: 2px 8px; border-radius: 999px; font-size: 12px; color: var(--muted); }
@@ -162,12 +173,8 @@
         While my core focus is C/C++, I also publish Python notebooks (data analysis, visualization, and ML) on Kaggle.
         Browse them here:
       </p>
-      <p>
-        <a class="btn" href="https://www.kaggle.com/mahditavakol/code" target="_blank">View my Kaggle Python projects</a>
-      </p>
-      <div class="mono">
-        pandas · numpy · matplotlib · scikit-learn · SciPy · Jupyter
-      </div>
+      <p><a class="btn" href="https://www.kaggle.com/mahditavakol/code" target="_blank">View my Kaggle Python projects</a></p>
+      <div class="mono">pandas · numpy · matplotlib · scikit-learn · SciPy · Jupyter</div>
     </section>
 
     <!-- DOCS -->
@@ -209,12 +216,10 @@ cmake --build build-debug -j</pre>
     </section>
   </main>
 
-  <footer>
+  <footer class="container">
     <p>© <span id="year"></span> Mahdi Tavakol • <a href="https://github.com/MahdiTavakol" target="_blank">GitHub</a> • <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank">LinkedIn</a></p>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
