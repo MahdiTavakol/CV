@@ -133,3 +133,24 @@ cmake --build build -j
 # Example: Debug build with symbols
 cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build build-debug -j
+
+---
+
+## 🗣️ Contact
+
+**Mahdi Tavakol**  
+_Postdoctoral Researcher | Computational Scientist_  
+📧 **mahdi.tavakol@eng.ox.ac.uk**
+
+I’m keen to bring my **modern C++ engineering** and **numerical simulation** experience to **GNC**, **robotics**, and **simulation software** roles.
+
+---
+
+## 📝 Notes
+
+- If PDFs don’t preview in your browser, download and open them locally.  
+- Some projects rely on newer compilers or libraries (e.g., **C++20+**).  
+  Check each repository’s README for exact requirements.
+
+---
+
