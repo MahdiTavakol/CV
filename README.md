@@ -5,7 +5,7 @@ prepared for the Capgemini Engineering — Software Engineer (GNC) interview (20
 
 ## Contents
 - `CV-MahdiTavakol.pdf` — my professional CV
-- `CV-MahdiTavakol-academic.pdf - my academic CV
+- `CV-MahdiTavakol-academic.pdf` - my academic CV
 - `C++-Overview.pptx` — portfolio slides summarizing my modern C++ projects
 - `C++-Overview.pdf` — slide deck in PDF format for quick viewing
 
