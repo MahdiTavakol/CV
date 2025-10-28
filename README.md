@@ -188,7 +188,7 @@
         <a href="C++-Overview.pptx" class="badge-img"><img alt="PowerPoint" src="https://img.shields.io/badge/PowerPoint-9333EA?style=flat&logo=microsoftpowerpoint&logoColor=white" /></a>
       </div>
       <div class="mono" style="margin-top:8px;">
-        Place the files <code>CV.pdf</code>, <code>CV-academic.pdf</code>, <code>C++-Overview.pdf</code>, and <code>C++-Overview.pptx</code> next to this <code>index.html</code>.
+       
       </div>
     </section>
 
