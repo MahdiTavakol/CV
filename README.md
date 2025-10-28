@@ -31,6 +31,8 @@
   <a href="C++-Overview.pptx"><img alt="PowerPoint" src="https://img.shields.io/badge/PowerPoint-9333EA?style=flat&logo=microsoftpowerpoint&logoColor=white"></a>
   <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank">
     <img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white">
+  <a href="https://www.kaggle.com/mahditavakol" target="_blank">
+  <img alt="Python" src="https://img.shields.io/badge/Python-Kaggle%20Projects-3776AB?logo=python&logoColor=white&style=flat">
   </a>
 </p>
 
