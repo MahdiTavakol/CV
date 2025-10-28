@@ -1,5 +1,7 @@
-<h3 align="center">🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h3>
-<p align="center"><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
+<h3 align="center" style="margin-bottom: 0.2em;">🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h3>
+<p align="center" style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.95em;">
+  <strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong>
+</p>
 
 <p align="center" style="margin: 0; padding: 0;">
   <a href="https://en.cppreference.com/w/" target="_blank">
@@ -22,28 +24,33 @@
   </a>
 </p>
 
-
-
-<p align="center" style="margin: 0; padding: 0;">
-  <a href="CV.pdf"><img alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
-  <a href="CV-academic.pdf"><img alt="Academic CV" src="https://img.shields.io/badge/Academic%20CV-2563EB?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
-  <a href="C++-Overview.pdf"><img alt="Portfolio Slides" src="https://img.shields.io/badge/Portfolio%20Slides-7C3AED?style=flat&logo=googledrive&logoColor=white"></a>
-  <a href="C++-Overview.pptx"><img alt="PowerPoint" src="https://img.shields.io/badge/PowerPoint-9333EA?style=flat&logo=microsoftpowerpoint&logoColor=white"></a>
+<p align="center" style="margin: 0.3em 0 0.8em 0;">
+  <a href="CV.pdf">
+    <img alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=flat&logo=adobeacrobatreader&logoColor=white">
+  </a>
+  <a href="CV-academic.pdf">
+    <img alt="Academic CV" src="https://img.shields.io/badge/Academic%20CV-2563EB?style=flat&logo=adobeacrobatreader&logoColor=white">
+  </a>
+  <a href="C++-Overview.pdf">
+    <img alt="Portfolio Slides" src="https://img.shields.io/badge/Portfolio%20Slides-7C3AED?style=flat&logo=googledrive&logoColor=white">
+  </a>
+  <a href="C++-Overview.pptx">
+    <img alt="PowerPoint" src="https://img.shields.io/badge/PowerPoint-9333EA?style=flat&logo=microsoftpowerpoint&logoColor=white">
+  </a>
   <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank">
     <img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white">
+  </a>
   <a href="https://www.kaggle.com/mahditavakol/code" target="_blank">
-  <img alt="Python" src="https://img.shields.io/badge/Python-Kaggle%20Projects-3776AB?logo=python&logoColor=white&style=flat">
+    <img alt="Python" src="https://img.shields.io/badge/Python-Kaggle%20Projects-3776AB?logo=python&logoColor=white&style=flat">
   </a>
 </p>
 
-
 ---
 
-### 🧩  About
+### 🧩 About
 
 This repository contains my latest **CV** and **C++ portfolio slides**.  
 It highlights my approach to **high-performance numerical software** in C++ (C++17/20), with emphasis on **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
-
 
 ---
 
@@ -104,12 +111,9 @@ cmake --build build-debug -j
 
 **Mahdi Tavakol**  
 _Postdoctoral Researcher • Computational Scientist_  
-📧 <strong>mahditavakol90 &#91;at&#93; gmail &#91;dot&#93; com</strong>
+📧 <strong>mahditavakol90 [at] gmail [dot] com</strong>
 
-
-
-
-I’m keen to bring my **C**, **modern C++ engineering**, **CUDA C** and **numerical simulation** experience  
+I’m keen to bring my **C**, **modern C++ engineering**, **CUDA C**, and **numerical simulation** experience  
 to **software** development roles.
 
 ---
@@ -118,4 +122,3 @@ to **software** development roles.
 
 📄 If PDFs don’t preview in your browser, download them locally.  
 ⚙️ Some projects use **C++20+** features; see each repository for build details.
-
