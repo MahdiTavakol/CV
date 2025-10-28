@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,6 +10,12 @@
     --bg:#0a0b10; --text:#e8ecf2; --muted:#a9b4c2; --border:#222634;
     --panel:#10121a; --card:#121624; --link:#8ab4ff;
     --accent:#7c3aed; --accent2:#60a5fa; --good:#10b981; --warn:#f59e0b;
+
+    /* Tuning for showcase */
+    --peek: 8vw;            /* how much left/right cards peek */
+    --center-scale: 1.10;   /* zoom for the centered card */
+    --side-scale: 0.96;     /* slight shrink for non-centered cards */
+    --snap-gap: 16px;       /* gap between cards */
   }
   @media (prefers-color-scheme: light){
     :root{ --bg:#ffffff; --text:#0f172a; --muted:#465366; --border:#e5e7eb; --panel:#f7f8fa; --card:#ffffff; --link:#1d4ed8; }
@@ -86,7 +91,7 @@
 
   .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.9; }
 
-  /* ===== Snap vertical for sections ===== */
+  /* ===== Vertical snap for sections ===== */
   main{ scroll-snap-type: y mandatory; }
 
   /* ===== Generic vertical section panels (after showcase) ===== */
@@ -113,34 +118,31 @@
   .card p{ margin:0; color:var(--muted); font-size:14px; }
   .btn{ display:inline-block; margin-top:8px; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
 
-  /* ===== SHOWCASE (Section 2): Horizontal snap with peeking cards ===== */
+  /* ===== SHOWCASE (Section 2): Horizontal snap with peeking & zoom center ===== */
   .showcase{
-    min-height:100svh; display:grid; place-items:center; padding:0; /* full height, no inner padding */
+    min-height:100svh; display:grid; place-items:center; padding:0;
     scroll-snap-align:start; scroll-snap-stop:always; border-bottom:1px solid var(--border);
     position:relative;
     background:
       radial-gradient(900px 600px at 10% 20%, rgba(96,165,250,.25), transparent 60%),
       radial-gradient(900px 600px at 80% 85%, rgba(124,58,237,.25), transparent 60%);
   }
-  /* Scroll container with side padding to create “peek” */
   .hshell{
     width:100%; height:100%;
     display:grid; place-items:center;
-    padding:0 8vw; /* controls how much neighbors peek */
+    padding:0 var(--peek);
     position:relative;
   }
   .rail{
-    display:flex; gap:16px; align-items:center;
+    display:flex; gap:var(--snap-gap); align-items:center;
     width:100%;
     overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -ms-overflow-style:none;
-    scroll-snap-type:x mandatory; scroll-padding-inline:8vw;  /* align centers considering padding */
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-    padding: 6vh 0; /* vertical breathing room */
+    scroll-snap-type:x mandatory; scroll-padding-inline:var(--peek);
+    overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
+    padding: 6vh 0;
   }
   .rail::-webkit-scrollbar{ display:none; }
 
-  /* Cards: big, rounded, snap to center */
   .hcard{
     flex:0 0 auto;
     width: clamp(320px, 72vw, 980px);
@@ -150,33 +152,36 @@
     position:relative; overflow:hidden;
     scroll-snap-align:center; scroll-snap-stop:always;
     text-decoration:none; color:inherit;
-    box-shadow:0 10px 30px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.03) inset;
-    transition: transform .25s ease, box-shadow .25s ease;
+    box-shadow:0 10px 24px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.03) inset;
+    transform: scale(var(--side-scale));
+    opacity: .85;
+    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease, filter .25s ease;
+    will-change: transform;
   }
-  .hcard:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.42), 0 0 0 1px rgba(255,255,255,.05) inset; }
-  .hthumb{
+  .hcard .hthumb{
     position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.88) saturate(1.06);
     -webkit-user-drag:none; user-drag:none; pointer-events:none;
-    transition: transform .35s ease;
+    transition: transform .35s ease, filter .25s ease;
   }
   .hcard:hover .hthumb{ transform: scale(1.03); }
 
-  .hshade{
-    position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.35) 35%, transparent);
+  /* Zoomed center card */
+  .hcard.is-center{
+    transform: scale(var(--center-scale));
+    opacity: 1;
+    box-shadow: 0 16px 42px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.05) inset;
+    z-index: 2;
   }
-  .hmeta{
-    position:absolute; left:16px; right:16px; bottom:14px;
-    display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
+  .hcard.is-center .hthumb{
+    filter:brightness(.95) saturate(1.12);
   }
-  .hmeta h3{ margin:0; font-size: clamp(16px, 2.5vw, 22px); }
-  .hmeta p{ margin:0; font-size: clamp(12px, 2vw, 14px); color:var(--muted); }
 
   /* Optional arrow hints */
   .hint{
     position:absolute; top:50%; transform:translateY(-50%);
     width:44px; height:44px; display:grid; place-items:center;
     border-radius:999px; border:1px solid var(--border); background:rgba(0,0,0,.3); color:#fff;
-    opacity:.7; user-select:none;
+    opacity:.75; user-select:none;
   }
   .hint:hover{ opacity:1; }
   .left-hint{ left:12px; }
@@ -201,10 +206,16 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="home" aria-label="hero">
+  <!-- 🔴 HERO VIDEO FILES GO HERE -->
+  <!-- Put your files in /assets/: hero.mp4 (H.264) and optional hero.webm, plus a poster image -->
   <video id="bgvid" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
     <source src="assets/hero.webm" type="video/webm">
     <source src="assets/hero.mp4" type="video/mp4">
+    <!-- Fallback text shown only if video can't load -->
+    Your browser does not support the video tag.
   </video>
+  <!-- 🔴 End of video block -->
+
   <div class="overlay" aria-hidden="true"></div>
 
   <div class="hero-inner">
@@ -244,7 +255,7 @@
 </section>
 
 <main>
-  <!-- ===== SECTION 2: SHOWCASE (Horizontal snap with peeking) ===== -->
+  <!-- ===== SECTION 2: SHOWCASE (Horizontal snap + zoom center) ===== -->
   <section class="showcase" id="showcase" aria-label="showcase">
     <div class="hshell">
       <button class="hint left-hint" id="leftBtn" aria-label="Scroll left">
@@ -255,31 +266,27 @@
       </button>
 
       <div class="rail" id="rail">
-        <!-- Each card is an anchor; click opens link -->
+        <!-- Replace thumbnails and links with your own -->
         <a class="hcard" href="C++-Overview.pdf" target="_blank" title="Portfolio Slides (PDF)">
           <img class="hthumb" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Slides preview">
           <div class="hshade"></div>
           <div class="hmeta"><h3>Portfolio Slides</h3><p>PDF deck</p></div>
         </a>
-
         <a class="hcard" href="https://github.com/MahdiTavakol/ModernCppProjects" target="_blank" title="ModernCppProjects">
           <img class="hthumb" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Projects">
           <div class="hshade"></div>
           <div class="hmeta"><h3>Modern C++ Projects</h3><p>Architecture • Performance</p></div>
         </a>
-
         <a class="hcard" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH" target="_blank" title="LAMMPS Constant-pH">
           <img class="hthumb" src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
           <div class="hshade"></div>
           <div class="hmeta"><h3>Constant-pH MD (LAMMPS)</h3><p>HPC integration</p></div>
         </a>
-
         <a class="hcard" href="https://www.kaggle.com/mahditavakol/code" target="_blank" title="Kaggle Notebooks">
           <img class="hthumb" src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
           <div class="hshade"></div>
           <div class="hmeta"><h3>Kaggle</h3><p>Python notebooks</p></div>
         </a>
-
         <a class="hcard" href="C++-Overview.pptx" target="_blank" title="Portfolio Slides (PPTX)">
           <img class="hthumb" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides PPTX">
           <div class="hshade"></div>
@@ -371,7 +378,7 @@
     hero.tabIndex=-1; hero.focus({preventScroll:true});
   })();
 
-  // Horizontal rail behavior: wheel to scroll; snap to nearest card after drag
+  // Horizontal rail behavior + CENTER ZOOM selection
   (function(){
     const rail = document.getElementById('rail');
     const leftBtn = document.getElementById('leftBtn');
@@ -389,59 +396,62 @@
     // Drag-to-scroll with momentum
     let down=false, sx=0, sl=0, vel=0, raf=null, lx=0, lt=0;
     const stop=()=>{ if(raf){ cancelAnimationFrame(raf); raf=null; } };
-    const momentum=()=>{ rail.scrollLeft -= vel; vel*=0.95; if(Math.abs(vel)>0.3){ raf=requestAnimationFrame(momentum); } };
+    const momentum=()=>{ rail.scrollLeft -= vel; vel*=0.95; if(Math.abs(vel)>0.3){ raf=requestAnimationFrame(momentum); } else { selectCenter(); } };
     rail.addEventListener('mousedown', (e)=>{ down=true; sx=e.pageX; sl=rail.scrollLeft; stop(); lx=sx; lt=performance.now(); rail.style.cursor='grabbing'; });
-    window.addEventListener('mousemove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.pageX-sx; rail.scrollLeft=sl-dx; vel=(e.pageX-lx)/(now-lt)*16; lx=e.pageX; lt=now; });
-    window.addEventListener('mouseup', ()=>{ if(!down) return; down=false; rail.style.cursor='grab'; stop(); momentum(); snapToNearest(); });
+    window.addEventListener('mousemove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.pageX-sx; rail.scrollLeft=sl-dx; vel=(e.pageX-lx)/(now-lt)*16; lx=e.pageX; lt=now; selectCenter(); });
+    window.addEventListener('mouseup', ()=>{ if(!down) return; down=false; rail.style.cursor='grab'; stop(); momentum(); });
 
     // Touch
     rail.addEventListener('touchstart', (e)=>{ down=true; sx=e.touches[0].pageX; sl=rail.scrollLeft; stop(); lx=sx; lt=performance.now(); }, {passive:true});
-    rail.addEventListener('touchmove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.touches[0].pageX-sx; rail.scrollLeft=sl-dx; vel=(e.touches[0].pageX-lx)/(now-lt)*16; lx=e.touches[0].pageX; lt=now; }, {passive:true});
-    rail.addEventListener('touchend', ()=>{ if(!down) return; down=false; stop(); momentum(); snapToNearest(); });
-
-    // Snap to the nearest card center
-    function snapToNearest(){
-      const cards = Array.from(rail.querySelectorAll('.hcard'));
-      if(cards.length===0) return;
-      const railRect = rail.getBoundingClientRect();
-      const railCenter = railRect.left + railRect.width/2;
-      let best=null, bestDist=Infinity;
-      cards.forEach(card=>{
-        const rect = card.getBoundingClientRect();
-        const center = rect.left + rect.width/2;
-        const dist = Math.abs(center - railCenter);
-        if(dist < bestDist){ bestDist=dist; best=card; }
-      });
-      if(best){
-        best.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-      }
-    }
+    rail.addEventListener('touchmove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.touches[0].pageX-sx; rail.scrollLeft=sl-dx; vel=(e.touches[0].pageX-lx)/(now-lt)*16; lx=e.touches[0].pageX; lt=now; selectCenter(); }, {passive:true});
+    rail.addEventListener('touchend', ()=>{ if(!down) return; down=false; stop(); momentum(); });
 
     // Arrow buttons move by one card
     function moveByCard(dir){
       const cards = Array.from(rail.querySelectorAll('.hcard'));
       if(cards.length===0) return;
+      const idx = currentCenterIndex(cards);
+      const targetIdx = Math.max(0, Math.min(cards.length-1, idx + dir));
+      cards[targetIdx].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      // Wait a bit then update center class
+      setTimeout(selectCenter, 350);
+    }
+    leftBtn.addEventListener('click', ()=>moveByCard(-1));
+    rightBtn.addEventListener('click', ()=>moveByCard(+1));
+
+    // Helper: find index of the card closest to rail center
+    function currentCenterIndex(cards){
       const railRect = rail.getBoundingClientRect();
       const railCenter = railRect.left + railRect.width/2;
       let bestIdx=0, bestDist=Infinity;
-      cards.forEach((c, i)=>{
+      cards.forEach((c,i)=>{
         const rect=c.getBoundingClientRect();
         const center=rect.left+rect.width/2;
         const d=Math.abs(center-railCenter);
         if(d<bestDist){ bestDist=d; bestIdx=i; }
       });
-      const targetIdx = Math.max(0, Math.min(cards.length-1, bestIdx + dir));
-      cards[targetIdx].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      return bestIdx;
     }
-    leftBtn.addEventListener('click', ()=>moveByCard(-1));
-    rightBtn.addEventListener('click', ()=>moveByCard(+1));
 
-    // Resize snapping recalibration
-    let rAF=null;
-    window.addEventListener('resize', ()=>{
-      if(rAF) cancelAnimationFrame(rAF);
-      rAF=requestAnimationFrame(()=>snapToNearest());
+    // Apply is-center class to the nearest card (for zoom/dim effect)
+    function selectCenter(){
+      const cards = Array.from(rail.querySelectorAll('.hcard'));
+      if(cards.length===0) return;
+      const idx = currentCenterIndex(cards);
+      cards.forEach((c,i)=> c.classList.toggle('is-center', i===idx));
+    }
+
+    // Update on scroll (throttled via rAF)
+    let ticking=false;
+    rail.addEventListener('scroll', ()=>{
+      if(!ticking){ requestAnimationFrame(()=>{ selectCenter(); ticking=false; }); ticking=true; }
     });
+
+    // Recalculate on resize and after load
+    window.addEventListener('resize', ()=>{ setTimeout(selectCenter, 100); });
+    window.addEventListener('load', selectCenter);
+    // Initial selection if images cached
+    selectCenter();
   })();
 
   // Year
