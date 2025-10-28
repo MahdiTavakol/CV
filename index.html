@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,7 +36,7 @@
   .spacer{ flex:1; }
   .cta{ background:linear-gradient(135deg,#7C3AED,#A78BFA); color:#fff !important; border:1px solid var(--border); }
 
-  /* ===== VIDEO HERO ===== */
+  /* ===== HERO (video) ===== */
   .hero{
     position:relative; height:100svh; overflow:hidden; border-bottom:1px solid var(--border);
     scroll-snap-align:start; scroll-snap-stop:always;
@@ -85,57 +86,24 @@
 
   .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.9; }
 
-  /* ===== Snap Scroller for sections ===== */
-  main{
-    scroll-snap-type: y mandatory; /* enables vertical snap */
-  }
+  /* ===== Snap vertical for sections ===== */
+  main{ scroll-snap-type: y mandatory; }
 
-  /* Section wrapper with big rounded panel */
+  /* ===== Generic vertical section panels (after showcase) ===== */
   section.block{
     min-height:100svh; display:grid; place-items:center; padding:24px 16px;
-    scroll-snap-align:start; scroll-snap-stop:always;
-    border-bottom:1px solid var(--border);
+    scroll-snap-align:start; scroll-snap-stop:always; border-bottom:1px solid var(--border);
     position:relative;
   }
   .panel{
     width:min(1200px, 94vw);
-    min-height:86svh; /* “fills most of the page” */
-    border-radius:18px;
-    border:1px solid var(--border);
-    background:var(--panel);
+    min-height:86svh;
+    border-radius:18px; border:1px solid var(--border); background:var(--panel);
     padding:20px;
-    box-shadow:
-      0 10px 30px rgba(0,0,0,.35),
-      0 0 0 1px rgba(255,255,255,.03) inset;
-    position:relative;
-    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.03) inset;
+    position:relative; overflow:hidden;
   }
   .panel .inner{ position:relative; z-index:2; }
-  /* Per-section backgrounds (customize as you like) */
-  .bg-grid::before,
-  .bg-purple::before,
-  .bg-blue::before,
-  .bg-green::before{
-    content:""; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.55;
-    background-size:cover; mix-blend-mode:screen;
-  }
-  .bg-grid::before{
-    background-image:
-      radial-gradient(1px 1px at 25px 25px, rgba(255,255,255,.06) 1px, transparent 0),
-      radial-gradient(1px 1px at 0 0, rgba(255,255,255,.06) 1px, transparent 0);
-    background-size:50px 50px, 50px 50px;
-    opacity:.35;
-  }
-  .bg-purple::before{
-    background-image:radial-gradient(800px 500px at 80% 10%, #a78bfa 0%, transparent 60%);
-  }
-  .bg-blue::before{
-    background-image:radial-gradient(900px 600px at 10% 20%, #60a5fa 0%, transparent 60%);
-  }
-  .bg-green::before{
-    background-image:radial-gradient(900px 600px at 70% 80%, #10b981 0%, transparent 60%);
-  }
-
   .h2{ font-size:22px; margin:0 0 10px; }
   .lead{ color:var(--muted); margin:0 0 18px; }
   .grid{ display:grid; gap:12px; }
@@ -144,6 +112,76 @@
   .card h3{ margin:0 0 6px; font-size:16px; }
   .card p{ margin:0; color:var(--muted); font-size:14px; }
   .btn{ display:inline-block; margin-top:8px; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
+
+  /* ===== SHOWCASE (Section 2): Horizontal snap with peeking cards ===== */
+  .showcase{
+    min-height:100svh; display:grid; place-items:center; padding:0; /* full height, no inner padding */
+    scroll-snap-align:start; scroll-snap-stop:always; border-bottom:1px solid var(--border);
+    position:relative;
+    background:
+      radial-gradient(900px 600px at 10% 20%, rgba(96,165,250,.25), transparent 60%),
+      radial-gradient(900px 600px at 80% 85%, rgba(124,58,237,.25), transparent 60%);
+  }
+  /* Scroll container with side padding to create “peek” */
+  .hshell{
+    width:100%; height:100%;
+    display:grid; place-items:center;
+    padding:0 8vw; /* controls how much neighbors peek */
+    position:relative;
+  }
+  .rail{
+    display:flex; gap:16px; align-items:center;
+    width:100%;
+    overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -ms-overflow-style:none;
+    scroll-snap-type:x mandatory; scroll-padding-inline:8vw;  /* align centers considering padding */
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 6vh 0; /* vertical breathing room */
+  }
+  .rail::-webkit-scrollbar{ display:none; }
+
+  /* Cards: big, rounded, snap to center */
+  .hcard{
+    flex:0 0 auto;
+    width: clamp(320px, 72vw, 980px);
+    aspect-ratio: 16/9;
+    border-radius:18px; border:1px solid var(--border);
+    background:var(--panel);
+    position:relative; overflow:hidden;
+    scroll-snap-align:center; scroll-snap-stop:always;
+    text-decoration:none; color:inherit;
+    box-shadow:0 10px 30px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.03) inset;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .hcard:hover{ transform:translateY(-2px); box-shadow:0 14px 36px rgba(0,0,0,.42), 0 0 0 1px rgba(255,255,255,.05) inset; }
+  .hthumb{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.88) saturate(1.06);
+    -webkit-user-drag:none; user-drag:none; pointer-events:none;
+    transition: transform .35s ease;
+  }
+  .hcard:hover .hthumb{ transform: scale(1.03); }
+
+  .hshade{
+    position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,.35) 35%, transparent);
+  }
+  .hmeta{
+    position:absolute; left:16px; right:16px; bottom:14px;
+    display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
+  }
+  .hmeta h3{ margin:0; font-size: clamp(16px, 2.5vw, 22px); }
+  .hmeta p{ margin:0; font-size: clamp(12px, 2vw, 14px); color:var(--muted); }
+
+  /* Optional arrow hints */
+  .hint{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:44px; height:44px; display:grid; place-items:center;
+    border-radius:999px; border:1px solid var(--border); background:rgba(0,0,0,.3); color:#fff;
+    opacity:.7; user-select:none;
+  }
+  .hint:hover{ opacity:1; }
+  .left-hint{ left:12px; }
+  .right-hint{ right:12px; }
+  .hint svg{ width:18px; height:18px; }
 
   footer{ padding:28px 16px 40px; text-align:center; color:var(--muted); font-size:13px; }
 </style>
@@ -154,15 +192,14 @@
   <nav class="nav">
     <div class="brand">Mahdi Tavakol</div>
     <div class="spacer"></div>
-    <a href="#stack">Stack</a>
-    <a href="#links">Links</a>
+    <a href="#showcase">Showcase</a>
     <a href="#repos">Projects</a>
     <a href="#aboutme">About me</a>
     <a class="cta" href="contact.html">Contact</a>
   </nav>
 </header>
 
-<!-- ===== HERO (auto-scroll on wheel/touch/key) ===== -->
+<!-- ===== HERO ===== -->
 <section class="hero" id="home" aria-label="hero">
   <video id="bgvid" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
     <source src="assets/hero.webm" type="video/webm">
@@ -207,45 +244,54 @@
 </section>
 
 <main>
-  <!-- ===== LINKS PANEL ===== -->
-  <section class="block" id="links" aria-label="links">
-    <div class="panel bg-grid">
-      <div class="inner">
-        <h2 class="h2">🔗 Quick Links</h2>
-        <p class="lead">Jump to dedicated pages with more detail.</p>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
-          <div class="card">
-            <h3>About</h3><p>Background, research focus, and what I bring to software teams.</p>
-            <a class="btn" href="about.html">Open about.html</a>
-          </div>
-          <div class="card">
-            <h3>Projects</h3><p>Modern C++, CUDA, numerical algorithms, and HPC work.</p>
-            <a class="btn" href="projects.html">Open projects.html</a>
-          </div>
-          <div class="card">
-            <h3>CV & Slides</h3><p>Downloadable PDFs and PPTX of my CVs and portfolio deck.</p>
-            <a class="btn" href="cv.html">Open cv.html</a>
-          </div>
-          <div class="card">
-            <h3>Kaggle</h3><p>Python notebooks for data analysis and ML.</p>
-            <a class="btn" target="_blank" href="https://www.kaggle.com/mahditavakol/code">Open Kaggle</a>
-          </div>
-          <div class="card">
-            <h3>Contact</h3><p>Get in touch for roles in software engineering and simulation.</p>
-            <a class="btn" href="contact.html">Open contact.html</a>
-          </div>
-          <div class="card">
-            <h3>GitHub</h3><p>Source code and ongoing work.</p>
-            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol">Open GitHub</a>
-          </div>
-        </div>
+  <!-- ===== SECTION 2: SHOWCASE (Horizontal snap with peeking) ===== -->
+  <section class="showcase" id="showcase" aria-label="showcase">
+    <div class="hshell">
+      <button class="hint left-hint" id="leftBtn" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="hint right-hint" id="rightBtn" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="rail" id="rail">
+        <!-- Each card is an anchor; click opens link -->
+        <a class="hcard" href="C++-Overview.pdf" target="_blank" title="Portfolio Slides (PDF)">
+          <img class="hthumb" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Slides preview">
+          <div class="hshade"></div>
+          <div class="hmeta"><h3>Portfolio Slides</h3><p>PDF deck</p></div>
+        </a>
+
+        <a class="hcard" href="https://github.com/MahdiTavakol/ModernCppProjects" target="_blank" title="ModernCppProjects">
+          <img class="hthumb" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Projects">
+          <div class="hshade"></div>
+          <div class="hmeta"><h3>Modern C++ Projects</h3><p>Architecture • Performance</p></div>
+        </a>
+
+        <a class="hcard" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH" target="_blank" title="LAMMPS Constant-pH">
+          <img class="hthumb" src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
+          <div class="hshade"></div>
+          <div class="hmeta"><h3>Constant-pH MD (LAMMPS)</h3><p>HPC integration</p></div>
+        </a>
+
+        <a class="hcard" href="https://www.kaggle.com/mahditavakol/code" target="_blank" title="Kaggle Notebooks">
+          <img class="hthumb" src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
+          <div class="hshade"></div>
+          <div class="hmeta"><h3>Kaggle</h3><p>Python notebooks</p></div>
+        </a>
+
+        <a class="hcard" href="C++-Overview.pptx" target="_blank" title="Portfolio Slides (PPTX)">
+          <img class="hthumb" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides PPTX">
+          <div class="hshade"></div>
+          <div class="hmeta"><h3>Slides (PPTX)</h3><p>Editable</p></div>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ===== REPOS PANEL ===== -->
+  <!-- ===== VERTICAL PANELS ===== -->
   <section class="block" id="repos" aria-label="projects">
-    <div class="panel bg-purple">
+    <div class="panel">
       <div class="inner">
         <h2 class="h2">🗂 Featured Repositories</h2>
         <div class="grid">
@@ -274,9 +320,8 @@
     </div>
   </section>
 
-  <!-- ===== ABOUT ME PANEL ===== -->
   <section class="block" id="aboutme" aria-label="about-me">
-    <div class="panel bg-blue">
+    <div class="panel">
       <div class="inner">
         <h2 class="h2">📄 About me</h2>
         <p class="lead">CVs and slide deck for quick review.</p>
@@ -290,9 +335,8 @@
     </div>
   </section>
 
-  <!-- ===== CONTACT PANEL ===== -->
   <section class="block" id="contact" aria-label="contact">
-    <div class="panel bg-green">
+    <div class="panel">
       <div class="inner">
         <h2 class="h2">🗣️ Contact</h2>
         <p class="lead"><strong>Mahdi Tavakol</strong> — Postdoctoral Researcher • Computational Scientist</p>
@@ -307,58 +351,98 @@
 </footer>
 
 <script>
-  // Pause background video if reduced motion preferred
+  // Respect reduced motion
   const vid = document.getElementById('bgvid');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    vid && vid.pause();
-  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { vid && vid.pause(); }
 
-  // Auto-advance from HERO to the next section on first downward action
+  // Auto-advance from HERO to Showcase on first downward action
   (function(){
     const hero = document.getElementById('home');
-    const next = document.getElementById('links');
+    const next = document.getElementById('showcase');
     if(!hero || !next) return;
-
-    let fired = false; // avoid double firing
-    const goNext = ()=>{
-      if (fired) return;
-      fired = true;
-      next.scrollIntoView({behavior:'smooth', block:'start'});
-      setTimeout(()=>{ fired = false; }, 800); // re-arm
-    };
-
-    // Wheel (mouse/trackpad)
-    hero.addEventListener('wheel', (e)=>{
-      const dy = e.deltaY || 0;
-      if (dy > 12) { e.preventDefault(); goNext(); }
-    }, {passive:false});
-
-    // Keys
-    hero.addEventListener('keydown', (e)=>{
-      const keys = ['ArrowDown','PageDown',' '];
-      if (keys.includes(e.key)) { e.preventDefault(); goNext(); }
-    });
-
-    // Touch swipe down
-    let startY = null;
-    hero.addEventListener('touchstart', (e)=>{ startY = e.touches[0].clientY; }, {passive:true});
-    hero.addEventListener('touchmove', (e)=>{
-      if (startY === null) return;
-      const dy = startY - e.touches[0].clientY; // positive when swiping up; negative when swiping down
-      if (dy < -18) { e.preventDefault(); goNext(); startY = null; }
-    }, {passive:false});
-    hero.addEventListener('touchend', ()=>{ startY = null; });
-
-    // Make hero focusable to capture key events
-    hero.tabIndex = -1;
-    hero.focus({preventScroll:true});
+    let fired = false;
+    const goNext = ()=>{ if(fired) return; fired = true; next.scrollIntoView({behavior:'smooth'}); setTimeout(()=>fired=false, 800); };
+    hero.addEventListener('wheel',(e)=>{ if(e.deltaY>12){ e.preventDefault(); goNext(); }},{passive:false});
+    hero.addEventListener('keydown',(e)=>{ if(['ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); goNext(); }});
+    let sy=null;
+    hero.addEventListener('touchstart',(e)=>{ sy=e.touches[0].clientY; },{passive:true});
+    hero.addEventListener('touchmove',(e)=>{ if(sy===null) return; const dy=sy-e.touches[0].clientY; if(dy< -18){ e.preventDefault(); goNext(); sy=null; }},{passive:false});
+    hero.addEventListener('touchend',()=>{ sy=null; });
+    hero.tabIndex=-1; hero.focus({preventScroll:true});
   })();
 
-  // Reveal on intersection (optional)
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.panel').forEach(el=>io.observe(el));
+  // Horizontal rail behavior: wheel to scroll; snap to nearest card after drag
+  (function(){
+    const rail = document.getElementById('rail');
+    const leftBtn = document.getElementById('leftBtn');
+    const rightBtn = document.getElementById('rightBtn');
+    if(!rail) return;
+
+    // Convert vertical wheel to horizontal scroll on the rail
+    rail.addEventListener('wheel', (e)=>{
+      if(Math.abs(e.deltaY) > Math.abs(e.deltaX)){
+        e.preventDefault();
+        rail.scrollLeft += e.deltaY;
+      }
+    }, {passive:false});
+
+    // Drag-to-scroll with momentum
+    let down=false, sx=0, sl=0, vel=0, raf=null, lx=0, lt=0;
+    const stop=()=>{ if(raf){ cancelAnimationFrame(raf); raf=null; } };
+    const momentum=()=>{ rail.scrollLeft -= vel; vel*=0.95; if(Math.abs(vel)>0.3){ raf=requestAnimationFrame(momentum); } };
+    rail.addEventListener('mousedown', (e)=>{ down=true; sx=e.pageX; sl=rail.scrollLeft; stop(); lx=sx; lt=performance.now(); rail.style.cursor='grabbing'; });
+    window.addEventListener('mousemove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.pageX-sx; rail.scrollLeft=sl-dx; vel=(e.pageX-lx)/(now-lt)*16; lx=e.pageX; lt=now; });
+    window.addEventListener('mouseup', ()=>{ if(!down) return; down=false; rail.style.cursor='grab'; stop(); momentum(); snapToNearest(); });
+
+    // Touch
+    rail.addEventListener('touchstart', (e)=>{ down=true; sx=e.touches[0].pageX; sl=rail.scrollLeft; stop(); lx=sx; lt=performance.now(); }, {passive:true});
+    rail.addEventListener('touchmove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.touches[0].pageX-sx; rail.scrollLeft=sl-dx; vel=(e.touches[0].pageX-lx)/(now-lt)*16; lx=e.touches[0].pageX; lt=now; }, {passive:true});
+    rail.addEventListener('touchend', ()=>{ if(!down) return; down=false; stop(); momentum(); snapToNearest(); });
+
+    // Snap to the nearest card center
+    function snapToNearest(){
+      const cards = Array.from(rail.querySelectorAll('.hcard'));
+      if(cards.length===0) return;
+      const railRect = rail.getBoundingClientRect();
+      const railCenter = railRect.left + railRect.width/2;
+      let best=null, bestDist=Infinity;
+      cards.forEach(card=>{
+        const rect = card.getBoundingClientRect();
+        const center = rect.left + rect.width/2;
+        const dist = Math.abs(center - railCenter);
+        if(dist < bestDist){ bestDist=dist; best=card; }
+      });
+      if(best){
+        best.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+      }
+    }
+
+    // Arrow buttons move by one card
+    function moveByCard(dir){
+      const cards = Array.from(rail.querySelectorAll('.hcard'));
+      if(cards.length===0) return;
+      const railRect = rail.getBoundingClientRect();
+      const railCenter = railRect.left + railRect.width/2;
+      let bestIdx=0, bestDist=Infinity;
+      cards.forEach((c, i)=>{
+        const rect=c.getBoundingClientRect();
+        const center=rect.left+rect.width/2;
+        const d=Math.abs(center-railCenter);
+        if(d<bestDist){ bestDist=d; bestIdx=i; }
+      });
+      const targetIdx = Math.max(0, Math.min(cards.length-1, bestIdx + dir));
+      cards[targetIdx].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+    }
+    leftBtn.addEventListener('click', ()=>moveByCard(-1));
+    rightBtn.addEventListener('click', ()=>moveByCard(+1));
+
+    // Resize snapping recalibration
+    let rAF=null;
+    window.addEventListener('resize', ()=>{
+      if(rAF) cancelAnimationFrame(rAF);
+      rAF=requestAnimationFrame(()=>snapToNearest());
+    });
+  })();
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
