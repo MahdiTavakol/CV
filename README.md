@@ -96,9 +96,8 @@ cmake --build build-debug -j
 
 **Mahdi Tavakol**  
 _Postdoctoral Researcher • Computational Scientist_  
-<p>
-  📧 <strong>mahditavakol90 &#91;at&#93; gmail &#91;dot&#93; com</strong>
-</p>
+📧 <strong>mahditavakol90 &#91;at&#93; gmail &#91;dot&#93; com</strong>
+
 
 
 
