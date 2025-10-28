@@ -1,3 +1,21 @@
+<h1 align="center">🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h1>
+<p align="center"><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
+
+<p align="center">
+  <a href="#"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white"></a>
+  <a href="#"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2"></a>
+  <a href="#"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5"></a>
+  <a href="#"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F"></a>
+  <a href="#"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake"></a>
+  <a href="#"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white"></a>
+</p>
+
+<p align="center">
+  <a href="CV-MahdiTavakol.pdf"><img alt="Professional CV" src="https://img.shields.io/badge/Download-Professional%20CV-0F766E?style=for-the-badge&logo=adobeacrobatreader&logoColor=white"></a>
+  <a href="CV-MahdiTavakol-academic.pdf"><img alt="Academic CV" src="https://img.shields.io/badge/Download-Academic%20CV-2563EB?style=for-the-badge&logo=adobeacrobatreader&logoColor=white"></a>
+  <a href="C++-Overview.pdf"><img alt="Portfolio Slides" src="https://img.shields.io/badge/View-Portfolio%20Slides-7C3AED?style=for-the-badge&logo=googledrive&logoColor=white"></a>
+  <a href="C++-Overview.pptx"><img alt="PowerPoint" src="https://img.shields.io/badge/Download-PowerPoint-9333EA?style=for-the-badge&logo=microsoftpowerpoint&logoColor=white"></a>
+</p>
 <!-- Hero -->
 <div align="center">
 
