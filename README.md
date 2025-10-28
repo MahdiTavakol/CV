@@ -1,21 +1,16 @@
-<div align="center" style="max-width:900px; margin:auto;">
+<h3 align="center">🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h3>
+<p align="center"><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
 
-<img src="https://via.placeholder.com/180" alt="Mahdi Tavakol photo" style="border-radius:50%; width:180px; height:180px; object-fit:cover; margin-bottom:10px;"/>
-
-<h3>🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h3>
-
-<p><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
-
-<p>
-  <a href="#"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=flat"></a>
-  <a href="#"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=flat"></a>
-  <a href="#"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=flat"></a>
-  <a href="#"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=flat"></a>
-  <a href="#"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=flat"></a>
-  <a href="#"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=flat"></a>
+<p align="center" style="margin: 0; padding: 0;">
+  <a href="#"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white"></a>
+  <a href="#"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2"></a>
+  <a href="#"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5"></a>
+  <a href="#"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F"></a>
+  <a href="#"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake"></a>
+  <a href="#"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white"></a>
 </p>
 
-<p>
+<p align="center" style="margin: 0; padding: 0;">
   <a href="CV-MahdiTavakol.pdf"><img alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
   <a href="CV-MahdiTavakol-academic.pdf"><img alt="Academic CV" src="https://img.shields.io/badge/Academic%20CV-2563EB?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
   <a href="C++-Overview.pdf"><img alt="Portfolio Slides" src="https://img.shields.io/badge/Portfolio%20Slides-7C3AED?style=flat&logo=googledrive&logoColor=white"></a>
@@ -27,7 +22,7 @@
 ### 🧩 About
 
 This repository contains my latest **CV** and **C++ portfolio slides**.  
-It highlights my engineering approach to **high-performance numerical software** in C++ (C++17/20), focusing on **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
+It highlights my approach to **high-performance numerical software** in C++ (C++17/20), with emphasis on **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
 
 ---
 
@@ -57,10 +52,10 @@ It highlights my engineering approach to **high-performance numerical software**
 
 | Repository | Description |
 |-------------|-------------|
-| [🌀 **ModernCppProjects**](https://github.com/MahdiTavakol/ModernCppProjects) | Focused C++ projects demonstrating **architecture**, **parallelism**, and **performance** (e.g. Mandelbrot renderer). |
-| [🧪 **LAMMPS-Constant-pH**](https://github.com/MahdiTavakol/LAMMPS-Constant-pH) | C++ extensions for **constant-pH MD**, with strong numerical and HPC integration. |
+| [🌀 **ModernCppProjects**](https://github.com/MahdiTavakol/ModernCppProjects) | C++ projects demonstrating **architecture**, **parallelism**, and **performance** (e.g. Mandelbrot renderer). |
+| [🧪 **LAMMPS-Constant-pH**](https://github.com/MahdiTavakol/LAMMPS-Constant-pH) | C++ extensions for **constant-pH MD** with robust HPC integration. |
 | [⛰️ **MetaDynamics / TI**](https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025) | Adaptive biasing and thermodynamic integration methods. |
-| [🧠 **NeuralNetwork (C++)**](https://github.com/MahdiTavakol/ModernCppProjects) | Eigen-powered neural network demonstrating **RAII**, **batching**, and **OpenMP/MPI** acceleration. |
+| [🧠 **NeuralNetwork (C++)**](https://github.com/MahdiTavakol/ModernCppProjects) | Eigen-powered neural network with **RAII** and **OpenMP/MPI** acceleration. |
 
 ---
 
@@ -72,7 +67,7 @@ It highlights my engineering approach to **high-performance numerical software**
 **Parallel:** OpenMP, MPI, CUDA  
 **OS/Dev:** Linux (GCC/Clang/icpx), Git
 
-<pre style="font-size:12px; line-height:1.4em; background:#f8f8f8; padding:0.6em 0.8em; border-radius:6px; border:1px solid #ccc; text-align:left;">
+<pre style="font-size: 12px; line-height: 1.4em; background:#f8f8f8; padding:0.5em 0.7em; border-radius:6px; border:1px solid #ccc;">
 # Example: configure & build (Release)
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j
@@ -97,9 +92,5 @@ to **software** development roles.
 
 ### 📝 Notes
 
-📄 If PDFs don’t preview in your browser, download and open them locally.  
-⚙️ Some projects rely on **C++20+** features; check each repo’s README for details.
-
----
-
-</div>
+📄 If PDFs don’t preview in your browser, download them locally.  
+⚙️ Some projects use **C++20+** features; see each repository for build details.
