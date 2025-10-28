@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</title>
-<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Portfolio of Mahdi Tavakol" />
+<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science. Portfolio of Mahdi Tavakol with CVs, slides, GitHub, Kaggle." />
 <style>
   :root{
     --bg:#0a0b10; --text:#e8ecf2; --muted:#a9b4c2; --border:#222634;
@@ -18,9 +18,9 @@
   html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica Neue,Arial; }
   html{ scroll-behavior:smooth; }
 
-  /* ====== NAV ====== */
+  /* ===== NAV ===== */
   header{
-    position:sticky; top:0; z-index:50;
+    position:sticky; top:0; z-index:60;
     backdrop-filter: blur(8px);
     background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.08));
     border-bottom:1px solid var(--border);
@@ -33,26 +33,29 @@
   .nav a{ color:var(--muted); text-decoration:none; font-weight:600; font-size:14px; padding:8px 10px; border-radius:8px; }
   .nav a:hover{ color:var(--text); background:rgba(255,255,255,.06); }
   .spacer{ flex:1; }
+  .cta{ background:linear-gradient(135deg,#7C3AED,#A78BFA); color:#fff !important; border:1px solid var(--border); }
 
-  /* ====== HERO (parallax layers) ====== */
+  /* ===== VIDEO HERO ===== */
   .hero{
-    position:relative; height:100svh; overflow:hidden;
-    display:grid; place-items:center;
-    border-bottom:1px solid var(--border);
+    position:relative; height:100svh; overflow:hidden; border-bottom:1px solid var(--border);
   }
-  .layer{
-    position:absolute; inset:0; background-position:center; background-size:cover; will-change:transform; pointer-events:none; opacity:.28;
+  .hero video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; filter:brightness(.55) contrast(1.05) saturate(1.08);
   }
-  .l1{ background-image:radial-gradient(1000px 600px at 10% 20%, #3b82f6 0%, transparent 60%); }
-  .l2{ background-image:radial-gradient(800px 500px at 80% 10%, #a78bfa 0%, transparent 60%); mix-blend-mode:screen; }
-  .l3{ background-image:radial-gradient(900px 700px at 50% 80%, #10b981 0%, transparent 65%); mix-blend-mode:screen; }
-
+  .hero .overlay{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(1200px 600px at 10% 20%, rgba(59,130,246,.35), transparent 60%),
+      radial-gradient(1000px 600px at 80% 10%, rgba(167,139,250,.35), transparent 60%),
+      linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55) 60%, rgba(0,0,0,.85));
+    pointer-events:none;
+  }
   .hero-inner{
-    position:relative; text-align:center; padding:0 16px; z-index:2;
-    max-width:1000px;
+    position:relative; z-index:2; height:100%; display:grid; place-items:center; text-align:center; padding:0 16px;
   }
-  .title{ font-size:clamp(28px,5vw,54px); margin:0 0 8px; letter-spacing:.2px; }
-  .subtitle{ margin:0 0 18px; color:var(--muted); font-size:clamp(14px,2vw,18px); }
+  .title{ font-size:clamp(28px,5vw,56px); margin:0 0 10px; letter-spacing:.2px; }
+  .subtitle{ margin:0 0 18px; color:var(--muted); font-size:clamp(14px,2.2vw,18px); }
 
   .label{
     display:inline-block; margin: 8px 0 8px; padding: 4px 10px;
@@ -60,9 +63,8 @@
     background:rgba(0,0,0,.2);
   }
   .badges{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-  .badge-img img{ height:28px; display:block; }
+  .badge-img img{ height:30px; display:block; }
 
-  /* Distinct pill buttons (profiles / about me) */
   .row{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:10px 0 0; }
   .pill{
     display:inline-flex; align-items:center; gap:10px; padding:10px 14px;
@@ -80,48 +82,30 @@
   .pptx{ background:linear-gradient(135deg,#D35230,#E07B5D); }
   .tag{ font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.18); }
 
-  .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.8; }
+  .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.9; }
 
-  /* ====== SECTION WRAPPER ====== */
+  /* ===== SECTION WRAPPER ===== */
   section.block{ padding:64px 16px; border-bottom:1px solid var(--border); }
   .container{ max-width:1200px; margin:0 auto; }
   .h2{ font-size:22px; margin:0 0 10px; }
   .lead{ color:var(--muted); margin:0 0 18px; }
 
-  /* ====== REVEAL ANIMATIONS ====== */
+  /* ===== REVEAL ===== */
   .reveal{ opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.show{ opacity:1; transform:none; }
 
-  /* ====== DRAG GALLERY (FIXED) ====== */
-  .gallery{
-    border:1px solid var(--border); border-radius:14px; background:var(--panel);
-    overflow:hidden;
+  /* ===== QUICK LINKS GRID ===== */
+  .links-grid{ display:grid; gap:12px; }
+  @media (min-width:850px){ .links-grid{ grid-template-columns: repeat(3, 1fr); } }
+  .link-card{
+    background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px;
+    display:flex; flex-direction:column; gap:8px;
   }
-  /* The TRACK is now the SCROLL CONTAINER */
-  .track{
-    display:flex; gap:10px; padding:12px;
-    overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
-    -ms-overflow-style:none; /* IE */
-    overscroll-behavior-x: contain; /* stop rubber-banding on touchpads */
-    cursor:grab;
-  }
-  .track::-webkit-scrollbar{ display:none; }
-  .track.dragging{ cursor:grabbing; }
+  .link-card h3{ margin:0; font-size:16px; }
+  .link-card p{ margin:0; color:var(--muted); font-size:14px; }
+  .btn{ display:inline-block; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
 
-  .card-img{
-    flex:0 0 auto; width: clamp(260px, 36vw, 520px); aspect-ratio: 16/9;
-    border-radius:12px; overflow:hidden; background:var(--card); border:1px solid var(--border);
-    position:relative; transform:translateZ(0);
-  }
-  .card-img img{
-    width:100%; height:100%; object-fit:cover; display:block;
-    filter:contrast(1.03) saturate(1.03);
-    transition:transform .3s ease, filter .3s ease;
-    -webkit-user-drag:none; user-drag:none; pointer-events:none; /* prevents browser image-drag ghost */
-  }
-  .card-img:hover img{ transform:scale(1.03); }
-
-  /* ====== GRID ====== */
+  /* ===== PROJECTS GRID ===== */
   .grid{ display:grid; gap:12px; }
   @media (min-width:850px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
   .card{
@@ -129,7 +113,6 @@
   }
   .card h3{ margin:0 0 6px; font-size:16px; }
   .card p{ margin:0; color:var(--muted); font-size:14px; }
-  .btn{ display:inline-block; margin-top:8px; font-size:13px; padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
 
   footer{ padding:28px 16px 40px; text-align:center; color:var(--muted); font-size:13px; }
 </style>
@@ -141,85 +124,100 @@
     <div class="brand">Mahdi Tavakol</div>
     <div class="spacer"></div>
     <a href="#stack">Stack</a>
-    <a href="#gallery">Showcase</a>
+    <a href="#links">Links</a>
     <a href="#repos">Projects</a>
-    <a href="#kaggle">Python</a>
     <a href="#aboutme">About me</a>
-    <a href="#contact">Contact</a>
+    <a class="cta" href="contact.html">Contact</a>
   </nav>
 </header>
 
-<!-- ====== HERO with parallax ====== -->
+<!-- ===== VIDEO HERO ===== -->
 <section class="hero" id="home" aria-label="hero">
-  <div class="layer l1" data-depth="0.15"></div>
-  <div class="layer l2" data-depth="0.30"></div>
-  <div class="layer l3" data-depth="0.50"></div>
+  <!-- Replace these with your files -->
+  <video id="bgvid" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+    <source src="assets/hero.webm" type="video/webm">
+    <source src="assets/hero.mp4" type="video/mp4">
+    <!-- Fallback text -->
+  </video>
+  <div class="overlay" aria-hidden="true"></div>
 
   <div class="hero-inner">
-    <h1 class="title">🧭 Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</h1>
-    <p class="subtitle"><strong>Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Linux Toolchains</strong></p>
+    <div>
+      <h1 class="title">🧭 Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</h1>
+      <p class="subtitle"><strong>Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Linux Toolchains</strong></p>
 
-    <div class="label">Tech stack</div>
-    <div class="badges" id="stack">
-      <a href="https://en.cppreference.com/w/" target="_blank" class="badge-img"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=for-the-badge"></a>
-      <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
-      <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
-      <a href="https://www.mpi-forum.org/" target="_blank" class="badge-img"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=for-the-badge"></a>
-      <a href="https://developer.nvidia.com/cuda-zone" target="_blank" class="badge-img"><img alt="CUDA" src="https://img.shields.io/badge/CUDA-GPU%20Computing-76B900?logo=nvidia&logoColor=white&style=for-the-badge"></a>
-      <a href="https://cmake.org/" target="_blank" class="badge-img"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=for-the-badge"></a>
-      <a href="https://www.kernel.org/linux.html" target="_blank" class="badge-img"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=for-the-badge"></a>
-    </div>
+      <div class="label">Tech stack</div>
+      <div class="badges" id="stack">
+        <a href="https://en.cppreference.com/w/" target="_blank" class="badge-img"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=for-the-badge"></a>
+        <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
+        <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
+        <a href="https://www.mpi-forum.org/" target="_blank" class="badge-img"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=for-the-badge"></a>
+        <a href="https://developer.nvidia.com/cuda-zone" target="_blank" class="badge-img"><img alt="CUDA" src="https://img.shields.io/badge/CUDA-GPU%20Computing-76B900?logo=nvidia&logoColor=white&style=for-the-badge"></a>
+        <a href="https://cmake.org/" target="_blank" class="badge-img"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=for-the-badge"></a>
+        <a href="https://www.kernel.org/linux.html" target="_blank" class="badge-img"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=for-the-badge"></a>
+      </div>
 
-    <div class="label">My profiles</div>
-    <div class="row">
-      <a class="pill ln" href="https://www.linkedin.com/in/mahditavakol/" target="_blank">🔗 LinkedIn <span class="tag">My profile</span></a>
-      <a class="pill gh" href="https://github.com/MahdiTavakol" target="_blank">🐙 GitHub <span class="tag">My profile</span></a>
-      <a class="pill kg" href="https://www.kaggle.com/mahditavakol/code" target="_blank">🧪 Kaggle <span class="tag">My notebooks</span></a>
-    </div>
+      <div class="label">My profiles</div>
+      <div class="row">
+        <a class="pill ln" href="https://www.linkedin.com/in/mahditavakol/" target="_blank">🔗 LinkedIn <span class="tag">My profile</span></a>
+        <a class="pill gh" href="https://github.com/MahdiTavakol" target="_blank">🐙 GitHub <span class="tag">My profile</span></a>
+        <a class="pill kg" href="https://www.kaggle.com/mahditavakol/code" target="_blank">🧪 Kaggle <span class="tag">My notebooks</span></a>
+      </div>
 
-    <div class="label">About me</div>
-    <div class="row">
-      <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
-      <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
-      <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
-      <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
+      <div class="label">About me</div>
+      <div class="row">
+        <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
+        <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
+        <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
+        <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
+      </div>
     </div>
   </div>
 
-  <div class="scroll-cue">Scroll ↓ Drag the gallery</div>
+  <div class="scroll-cue">Scroll ↓</div>
 </section>
 
-<!-- ====== SHOWCASE: Drag-to-scroll Gallery (FIXED) ====== -->
-<section class="block" id="gallery" aria-label="showcase">
+<!-- ===== QUICK LINKS to other pages ===== -->
+<section class="block" id="links">
   <div class="container">
-    <h2 class="h2 reveal">🖼️ Interactive Showcase</h2>
-    <p class="lead reveal">Click and drag (or swipe) to browse featured visuals — code snapshots, slides, or project images.</p>
-
-    <div class="gallery reveal">
-      <!-- TRACK is the scroll container -->
-      <div class="track" id="dragTrack">
-        <!-- Replace image src with your assets; draggable=false prevents browser ghost-drag -->
-        <a class="card-img" href="C++-Overview.pdf" target="_blank" title="Portfolio Slides">
-          <img draggable="false" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Code & terminal">
-        </a>
-        <a class="card-img" href="https://github.com/MahdiTavakol/ModernCppProjects" target="_blank" title="Modern C++ Projects">
-          <img draggable="false" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Editor">
-        </a>
-        <a class="card-img" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH" target="_blank" title="LAMMPS Constant-pH">
-          <img draggable="false" src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
-        </a>
-        <a class="card-img" href="https://www.kaggle.com/mahditavakol/code" target="_blank" title="Kaggle Notebooks">
-          <img draggable="false" src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
-        </a>
-        <a class="card-img" href="C++-Overview.pptx" target="_blank" title="Slides PPTX">
-          <img draggable="false" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides">
-        </a>
+    <h2 class="h2 reveal">🔗 Quick Links</h2>
+    <p class="lead reveal">Jump to dedicated pages with more detail.</p>
+    <div class="links-grid">
+      <div class="link-card reveal">
+        <h3>About</h3>
+        <p>Background, research focus, and what I bring to software teams.</p>
+        <a class="btn" href="about.html">Open about.html</a>
+      </div>
+      <div class="link-card reveal">
+        <h3>Projects</h3>
+        <p>Modern C++, CUDA, numerical algorithms, and HPC work.</p>
+        <a class="btn" href="projects.html">Open projects.html</a>
+      </div>
+      <div class="link-card reveal">
+        <h3>CV & Slides</h3>
+        <p>Downloadable PDFs and PPTX of my CVs and portfolio deck.</p>
+        <a class="btn" href="cv.html">Open cv.html</a>
+      </div>
+      <div class="link-card reveal">
+        <h3>Kaggle</h3>
+        <p>Python notebooks for data analysis and ML.</p>
+        <a class="btn" target="_blank" href="https://www.kaggle.com/mahditavakol/code">Open Kaggle</a>
+      </div>
+      <div class="link-card reveal">
+        <h3>Contact</h3>
+        <p>Get in touch for roles in software engineering and simulation.</p>
+        <a class="btn" href="contact.html">Open contact.html</a>
+      </div>
+      <div class="link-card reveal">
+        <h3>GitHub</h3>
+        <p>Source code and ongoing work.</p>
+        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol">Open GitHub</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ====== PROJECTS ====== -->
+<!-- ===== FEATURED REPOS ===== -->
 <section class="block" id="repos" aria-label="projects">
   <div class="container">
     <h2 class="h2 reveal">🗂 Featured Repositories</h2>
@@ -248,19 +246,8 @@
   </div>
 </section>
 
-<!-- ====== PYTHON / KAGGLE ====== -->
-<section class="block" id="kaggle" aria-label="python">
-  <div class="container">
-    <h2 class="h2 reveal">🐍 Python & Kaggle</h2>
-    <p class="lead reveal">I also publish Python notebooks for data analysis and ML on Kaggle.</p>
-    <div class="row reveal">
-      <a class="pill kg" href="https://www.kaggle.com/mahditavakol/code" target="_blank">🧪 Kaggle <span class="tag">My notebooks</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- ====== ABOUT ME (buttons duplicated) ====== -->
-<section class="block" id="aboutme" aria-label="about-me">
+<!-- ===== ABOUT ME (buttons duplicate) ===== -->
+<section class="block" id="aboutme">
   <div class="container">
     <h2 class="h2 reveal">📄 About me</h2>
     <p class="lead reveal">CVs and slide deck for quick review.</p>
@@ -273,89 +260,22 @@
   </div>
 </section>
 
-<!-- ====== CONTACT ====== -->
-<section class="block" id="contact" aria-label="contact">
-  <div class="container">
-    <h2 class="h2 reveal">🗣️ Contact</h2>
-    <p class="lead reveal"><strong>Mahdi Tavakol</strong> — Postdoctoral Researcher • Computational Scientist</p>
-    <p class="lead reveal">Email: mahditavakol90 [at] gmail [dot] com</p>
-  </div>
-</section>
-
 <footer>
   © <span id="year"></span> Mahdi Tavakol • <a href="https://github.com/MahdiTavakol" target="_blank" style="color:inherit">GitHub</a> • <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank" style="color:inherit">LinkedIn</a>
 </footer>
 
 <script>
-  // ===== Parallax on scroll (lightweight)
-  const layers = document.querySelectorAll('.layer');
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function parallax(){
-    if (prefersReduced) return;
-    const y = window.scrollY || window.pageYOffset;
-    layers.forEach(el=>{
-      const depth = parseFloat(el.dataset.depth || 0.2);
-      el.style.transform = `translateY(${y * depth * -0.25}px)`;
-    });
+  // Respect reduced motion: pause background video if requested
+  const vid = document.getElementById('bgvid');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vid && vid.pause();
   }
-  window.addEventListener('scroll', parallax, {passive:true});
 
-  // ===== Reveal on intersection
+  // Reveal sections on scroll
   const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('show'); }
-    });
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-  // ===== Drag-to-scroll gallery (mouse & touch) — FIXED
-  (function(){
-    const track = document.getElementById('dragTrack');
-    if(!track) return;
-
-    let isDown=false, startX=0, startScrollLeft=0, vel=0, raf=null, lastX=0, lastT=0;
-
-    const stopMomentum = ()=>{ if(raf){ cancelAnimationFrame(raf); raf=null; } };
-    const momentum = ()=>{
-      track.scrollLeft -= vel;
-      vel *= 0.95;
-      if(Math.abs(vel) > 0.3){ raf = requestAnimationFrame(momentum); }
-      else { raf=null; }
-    };
-
-    const onDown = (x)=>{
-      isDown=true;
-      track.classList.add('dragging');
-      startX=x;
-      startScrollLeft=track.scrollLeft;
-      stopMomentum();
-      lastX=x; lastT=performance.now();
-    };
-    const onMove = (x, e)=>{
-      if(!isDown) return;
-      if(e) e.preventDefault(); // prevent text/image selection on drag
-      const now = performance.now();
-      const walk = (x - startX);
-      track.scrollLeft = startScrollLeft - walk;
-      vel = (x - lastX) / (now - lastT) * 16; // px/frame approx
-      lastX = x; lastT = now;
-    };
-    const onUp = ()=>{
-      if(!isDown) return;
-      isDown=false; track.classList.remove('dragging');
-      stopMomentum(); momentum();
-    };
-
-    // Mouse
-    track.addEventListener('mousedown',(e)=>onDown(e.pageX));
-    track.addEventListener('mousemove',(e)=>onMove(e.pageX, e));
-    window.addEventListener('mouseup',onUp);
-
-    // Touch
-    track.addEventListener('touchstart',(e)=>onDown(e.touches[0].pageX), {passive:true});
-    track.addEventListener('touchmove',(e)=>onMove(e.touches[0].pageX, e), {passive:false});
-    window.addEventListener('touchend',onUp);
-  })();
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
