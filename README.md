@@ -36,8 +36,8 @@
 
 
 ---
-<abe style="font-size: 13px;">
-### 🧩 About
+
+### 🧩 <abe style="font-size: 13px;"> About
 
 This repository contains my latest **CV** and **C++ portfolio slides**.  
 It highlights my approach to **high-performance numerical software** in C++ (C++17/20), with emphasis on **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
