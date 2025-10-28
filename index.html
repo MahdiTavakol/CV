@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</title>
-<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science. Portfolio of Mahdi Tavakol with CVs, slides, GitHub, Kaggle." />
+<meta name="description" content="Modern C • C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science. Portfolio of Mahdi Tavakol with CVs, slides, GitHub, Kaggle." />
 <style>
   :root{
     --bg:#0a0b10; --text:#e8ecf2; --muted:#a9b4c2; --border:#222634;
@@ -12,8 +12,8 @@
 
     /* Showcase tuning */
     --peek: 8vw;            /* how much neighbors peek */
-    --center-scale: 1.75;   /* ⬅ bigger focused card */
-    --side-scale: 0.86;     /* ⬅ smaller neighbors */
+    --center-scale: 1.35;   /* focused card size */
+    --side-scale: 0.86;     /* neighbor size */
     --snap-gap: 16px;
   }
 
@@ -132,11 +132,17 @@
   </nav>
 </header>
 
-<!-- ===== HERO (put your video files in /assets) ===== -->
+<!-- ===== HERO (loads video from Google Drive) ===== -->
 <section class="hero" id="home" aria-label="hero">
-  <video id="bgvid" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
-    <source src="assets/hero.webm" type="video/webm">
-    <source src="assets/hero.mp4" type="video/mp4">
+  <!--
+    Replace FILE_ID_WEBM / FILE_ID_MP4 / FILE_ID_POSTER with your real Drive file IDs.
+    Make each file "Anyone with the link: Viewer".
+    Note: Google Drive can be unreliable for <video> (CORS/range). This is best-effort.
+  -->
+  <video id="bgvid" autoplay muted loop playsinline
+         poster="https://drive.google.com/uc?export=download&id=FILE_ID_POSTER">
+    <source src="https://drive.google.com/uc?export=download&id=FILE_ID_WEBM" type="video/webm">
+    <source src="https://drive.google.com/uc?export=download&id=FILE_ID_MP4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
   <div class="overlay" aria-hidden="true"></div>
@@ -144,10 +150,13 @@
   <div class="hero-inner">
     <div>
       <h1 class="title">🧭 Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</h1>
-      <p class="subtitle"><strong>Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science</strong></p>
+      <p class="subtitle"><strong>Modern C • C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science</strong></p>
 
+      <!-- Tech stack badges (C++ → C → Python → …) -->
       <div class="badges">
         <a href="https://en.cppreference.com/w/" target="_blank" class="badge-img"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=for-the-badge"></a>
+        <a href="https://www.open-std.org/jtc1/sc22/wg14/" target="_blank" class="badge-img"><img alt="C" src="https://img.shields.io/badge/C-ISO%20C-555555?logo=c&logoColor=white&style=for-the-badge"></a>
+        <a href="https://www.python.org/" target="_blank" class="badge-img"><img alt="Python" src="https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white&style=for-the-badge"></a>
         <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
         <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
         <a href="https://www.mpi-forum.org/" target="_blank" class="badge-img"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=for-the-badge"></a>
@@ -220,7 +229,7 @@
   <section class="block" id="aboutme" aria-label="about-me">
     <div class="panel">
       <h2>📄 About me</h2>
-      <p>I build high-performance numerical and simulation software in C++ and Python. My work focuses on RAII, parallelism (OpenMP/MPI/CUDA), and clean build systems.</p>
+      <p>I build high-performance numerical and simulation software in C and C++. My work focuses on RAII, parallelism (OpenMP/MPI/CUDA), and clean build systems; I also publish Python notebooks for data analysis.</p>
       <div class="row" style="margin-top:12px">
         <a class="pill cv" href="CV.pdf" target="_blank">Professional CV</a>
         <a class="pill acv" href="CV-academic.pdf" target="_blank">Academic CV</a>
@@ -261,7 +270,6 @@
     const goNext = ()=>{
       if (fired) return; fired = true;
       next.scrollIntoView({behavior:'smooth'});
-      // After the vertical scroll ends, center the first showcase card
       setTimeout(()=>{ window.centerShowcaseFirst?.(); fired = false; }, 700);
     };
 
@@ -278,7 +286,7 @@
     const showcase = document.getElementById('showcase');
     if(!rail || !showcase) return;
 
-    // 1) Define your slides HERE (edit URLs/thumbnails/titles as you wish)
+    // 1) Define your slides HERE
     const slidesData = [
       { href: 'C++-Overview.pdf', title: 'Portfolio Slides (PDF)', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop' },
       { href: 'https://github.com/MahdiTavakol/ModernCppProjects', title: 'Modern C++ Projects', img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop' },
@@ -340,11 +348,10 @@
     }
     window.centerShowcaseFirst = ()=> centerFirstOriginal('smooth');
 
-    // 5) Keep it circular: if user drags into prefix/suffix, jump to same logical index in originals
+    // 5) Keep it circular: normalize when we drift into prefix/suffix
     function normalizeIfOutOfBounds(){
       const rc = rail.getBoundingClientRect();
       const cx = rc.left + rc.width/2;
-      // find closest card at center
       let best=null, bestDist=Infinity;
       allCards.forEach(c=>{
         const r = c.getBoundingClientRect();
@@ -359,7 +366,6 @@
         const logical = parseInt(best.dataset.idx, 10);
         const target = origCards[logical];
         if (target) {
-          // jump instantly to the matching original card
           const left = target.offsetLeft + target.offsetWidth/2 - rail.clientWidth/2;
           rail.scrollTo({ left, behavior: 'instant' });
           setTimeout(markCenter, 0);
@@ -416,7 +422,6 @@
 
     // 8) Arrow buttons wrap circularly by logical index
     function currentLogicalIndex(){
-      // pick nearest card; map to its logical idx; if clone, it still has correct idx
       const rc = rail.getBoundingClientRect(); const cx = rc.left + rc.width/2;
       let best=null, bestDist=Infinity;
       allCards.forEach(c=>{
@@ -427,20 +432,15 @@
       return best ? parseInt(best.dataset.idx,10) : 0;
     }
     function centerLogical(idx, behavior='smooth'){
-      // center the original with the given logical index
-      const target = origCards[(idx % origCards.length + origCards.length) % origCards.length];
+      const n = origCards.length;
+      const safe = (idx % n + n) % n;
+      const target = origCards[safe];
       if (target) centerCard(target, behavior);
     }
-    leftBtn.addEventListener('click', ()=>{
-      const idx = currentLogicalIndex();
-      centerLogical(idx - 1, 'smooth');
-    });
-    rightBtn.addEventListener('click', ()=>{
-      const idx = currentLogicalIndex();
-      centerLogical(idx + 1, 'smooth');
-    });
+    leftBtn.addEventListener('click', ()=>{ centerLogical(currentLogicalIndex()-1, 'smooth'); });
+    rightBtn.addEventListener('click', ()=>{ centerLogical(currentLogicalIndex()+1, 'smooth'); });
 
-    // 9) Maintain center highlight while scrolling; also normalize loops
+    // 9) Maintain center highlight; normalize on scroll
     let ticking=false;
     rail.addEventListener('scroll', ()=>{
       if(!ticking){
@@ -469,7 +469,6 @@
       });
     }, { root: null, threshold: 0.6 }).observe(showcase);
 
-    // Helpers end
   })();
 
   // Year in footer
