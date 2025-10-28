@@ -3,22 +3,22 @@
 
 <p align="center" style="margin: 0; padding: 0;">
   <a href="https://en.cppreference.com/w/" target="_blank">
-    <img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=flat-square">
+    <img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=flat">
   </a>
   <a href="https://eigen.tuxfamily.org/" target="_blank">
-    <img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=flat-square">
+    <img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=flat">
   </a>
   <a href="https://www.openmp.org/" target="_blank">
-    <img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=flat-square">
+    <img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=flat">
   </a>
   <a href="https://www.mpi-forum.org/" target="_blank">
-    <img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=flat-square">
+    <img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=flat">
   </a>
   <a href="https://cmake.org/" target="_blank">
-    <img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=flat-square">
+    <img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=flat">
   </a>
   <a href="https://www.kernel.org/linux.html" target="_blank">
-    <img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=flat-square">
+    <img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=flat">
   </a>
 </p>
 
