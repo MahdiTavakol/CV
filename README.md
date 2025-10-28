@@ -1,3 +1,4 @@
+<div align="center" style="max-width:850px; margin:auto; font-size:14px; line-height:1.5;">
 <h3 align="center">🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h3>
 <p align="center"><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
 
@@ -103,6 +104,7 @@ _Postdoctoral Researcher • Computational Scientist_
 
 I’m keen to bring my **C**, **modern C++ engineering**, **CUDA C** and **numerical simulation** experience  
 to **software** development roles.
+</div>
 
 ---
 
