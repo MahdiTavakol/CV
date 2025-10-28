@@ -1,4 +1,4 @@
-<div align="center" style="max-width:850px; margin:auto; font-size:14px; line-height:1.5;">
+<div style="max-width:850px; margin:auto; font-size:14px; line-height:1.5;">
 <h3 align="center">🧭 Mahdi Tavakol — C++ Software Engineering Portfolio</h3>
 <p align="center"><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
 
