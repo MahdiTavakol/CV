@@ -115,7 +115,7 @@ Eigen-powered feed-forward framework demonstrating **RAII**, **batching**, and *
 
 </div>
 
----
+
 
 ## 🛠️ Toolchain & Skills
 
@@ -144,7 +144,7 @@ _Postdoctoral Researcher | Computational Scientist_
 
 I’m keen to bring my **modern C++ engineering** and **numerical simulation** experience to **GNC**, **robotics**, and **simulation software** roles.
 
----
+
 
 ## 📝 Notes
 
