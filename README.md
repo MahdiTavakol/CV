@@ -33,7 +33,6 @@
   </a>
 </p>
 
-<!-- blank line below is important so the HR renders: -->
 
 ---
 
