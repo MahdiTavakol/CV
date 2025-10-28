@@ -11,8 +11,8 @@
 </p>
 
 <p align="center" style="margin: 0; padding: 0;">
-  <a href="CV-MahdiTavakol.pdf"><img alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
-  <a href="CV-MahdiTavakol-academic.pdf"><img alt="Academic CV" src="https://img.shields.io/badge/Academic%20CV-2563EB?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
+  <a href="CV.pdf"><img alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
+  <a href="CV-academic.pdf"><img alt="Academic CV" src="https://img.shields.io/badge/Academic%20CV-2563EB?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
   <a href="C++-Overview.pdf"><img alt="Portfolio Slides" src="https://img.shields.io/badge/Portfolio%20Slides-7C3AED?style=flat&logo=googledrive&logoColor=white"></a>
   <a href="C++-Overview.pptx"><img alt="PowerPoint" src="https://img.shields.io/badge/PowerPoint-9333EA?style=flat&logo=microsoftpowerpoint&logoColor=white"></a>
 </p>
