@@ -120,9 +120,9 @@ Eigen-powered feed-forward framework demonstrating **RAII**, **batching**, and *
 ## 🛠️ Toolchain & Skills
 
 **Languages:** C++, Python, Bash  
-**Build:** CMake, Ninja, GitHub Actions  
+**Build:** CMake, GitHub Actions  
 **Math:** Eigen, STL algorithms  
-**Parallel:** OpenMP, MPI, (Intel oneAPI toolchain)  
+**Parallel:** OpenMP, MPI, CUDA  
 **OS/Dev:** Linux (GCC/Clang/icpx), Git
 
 ```bash
