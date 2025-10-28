@@ -95,7 +95,8 @@
     .btn-doc:hover { text-decoration: none; transform: translateY(-1px); }
     .btn-cv { background: linear-gradient(135deg, #0F766E, #34D399); }      /* green-ish */
     .btn-cv-ac { background: linear-gradient(135deg, #2563EB, #60A5FA); }   /* blue */
-    .btn-slides { background: linear-gradient(135deg, #7C3AED, #A78BFA); }  /* purple */
+    .btn-slides { background: linear-gradient(135deg, #7C3AED, #A78BFA); }  /* purple - PDF */
+    .btn-ppt { background: linear-gradient(135deg, #D35230, #E07B5D); }     /* PowerPoint orange */
     .btn-doc .tag {
       font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
       background: rgba(255,255,255,0.2); color: #fff; border:1px solid rgba(255,255,255,0.25);
@@ -150,6 +151,8 @@
         <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img height="28" alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
         <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img height="28" alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
         <a href="https://www.mpi-forum.org/" target="_blank" class="badge-img"><img height="28" alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=for-the-badge"></a>
+        <!-- NEW: CUDA badge -->
+        <a href="https://developer.nvidia.com/cuda-zone" target="_blank" class="badge-img"><img height="28" alt="CUDA" src="https://img.shields.io/badge/CUDA-GPU%20Computing-76B900?logo=nvidia&logoColor=white&style=for-the-badge"></a>
         <a href="https://cmake.org/" target="_blank" class="badge-img"><img height="28" alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=for-the-badge"></a>
         <a href="https://www.kernel.org/linux.html" target="_blank" class="badge-img"><img height="28" alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=for-the-badge"></a>
       </div>
@@ -178,7 +181,7 @@
         </a>
       </div>
 
-      <!-- ABOUT ME (previously Documents) -->
+      <!-- ABOUT ME (documents) -->
       <div class="label" aria-hidden="true">About me</div>
       <div class="aboutme" aria-label="About me documents">
         <a class="btn-doc btn-cv" href="CV.pdf" target="_blank" rel="noopener">
@@ -189,6 +192,10 @@
         </a>
         <a class="btn-doc btn-slides" href="C++-Overview.pdf" target="_blank" rel="noopener">
           <span>🖥️ Portfolio Slides</span><span class="tag">PDF</span>
+        </a>
+        <!-- NEW: PPTX button -->
+        <a class="btn-doc btn-ppt" href="C++-Overview.pptx" target="_blank" rel="noopener">
+          <span>📊 Portfolio Slides</span><span class="tag">PPTX</span>
         </a>
       </div>
     </section>
@@ -248,15 +255,26 @@
       <h2>🐍 Python & Kaggle</h2>
       <p>While my core expertise is in C/C++, I also publish Python notebooks for data analysis and ML on Kaggle.</p>
       <p><a class="btn" href="https://www.kaggle.com/mahditavakol/code" target="_blank">View my Kaggle Python projects</a></p>
-      <div class="mono">pandas · numpy · matplotlib · scikit-learn · SciPy · Jupyter</div>
+      <!-- removed library list per request -->
     </section>
 
-    <!-- DOCS (kept for clarity; optional to remove) -->
+    <!-- DOCS (replicate the buttons instead of plain text) -->
     <section id="docs" class="section">
       <h2>📄 CV & Slides</h2>
       <p>Download my latest CVs and portfolio slides.</p>
-      <div class="mono" style="margin-top:8px;">
-        Place <code>CV.pdf</code>, <code>CV-academic.pdf</code>, <code>C++-Overview.pdf</code> next to this file.
+      <div class="aboutme" aria-label="About me documents (duplicate)">
+        <a class="btn-doc btn-cv" href="CV.pdf" target="_blank" rel="noopener">
+          <span>📄 Professional CV</span><span class="tag">PDF</span>
+        </a>
+        <a class="btn-doc btn-cv-ac" href="CV-academic.pdf" target="_blank" rel="noopener">
+          <span>🎓 Academic CV</span><span class="tag">PDF</span>
+        </a>
+        <a class="btn-doc btn-slides" href="C++-Overview.pdf" target="_blank" rel="noopener">
+          <span>🖥️ Portfolio Slides</span><span class="tag">PDF</span>
+        </a>
+        <a class="btn-doc btn-ppt" href="C++-Overview.pptx" target="_blank" rel="noopener">
+          <span>📊 Portfolio Slides</span><span class="tag">PPTX</span>
+        </a>
       </div>
     </section>
 
