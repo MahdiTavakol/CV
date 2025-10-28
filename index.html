@@ -71,6 +71,7 @@
       padding: 10px 14px; border-radius: 999px; font-weight: 700; font-size: 14px;
       border: 1px solid var(--border); color: white; text-decoration: none;
       box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      transition: transform 120ms ease;
     }
     .btn-profile:hover { text-decoration: none; transform: translateY(-1px); }
     .btn-ln { background: linear-gradient(135deg, #0A66C2, #2E8AE6); }
@@ -81,6 +82,24 @@
       background: rgba(255,255,255,0.18); color: #fff; border:1px solid rgba(255,255,255,0.25);
     }
     .btn-kg .tag { color:#043b52; border-color: rgba(4,59,82,0.25); background: rgba(255,255,255,0.35); }
+
+    /* ABOUT ME (documents) buttons styled like profiles */
+    .aboutme { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin: 8px 0 14px; }
+    .btn-doc {
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 10px 14px; border-radius: 999px; font-weight: 700; font-size: 14px;
+      border: 1px solid var(--border); color: white; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      transition: transform 120ms ease;
+    }
+    .btn-doc:hover { text-decoration: none; transform: translateY(-1px); }
+    .btn-cv { background: linear-gradient(135deg, #0F766E, #34D399); }      /* green-ish */
+    .btn-cv-ac { background: linear-gradient(135deg, #2563EB, #60A5FA); }   /* blue */
+    .btn-slides { background: linear-gradient(135deg, #7C3AED, #A78BFA); }  /* purple */
+    .btn-doc .tag {
+      font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+      background: rgba(255,255,255,0.2); color: #fff; border:1px solid rgba(255,255,255,0.25);
+    }
 
     .section { margin: 18px 0 10px; padding: 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; }
     .section h2 { margin: 0 0 10px; font-size: 18px; }
@@ -159,12 +178,18 @@
         </a>
       </div>
 
-      <!-- DOCUMENTS as their own row -->
-      <div class="label" aria-hidden="true">Documents</div>
-      <div class="badges" aria-label="Documents">
-        <a href="CV.pdf" class="badge-img"><img height="28" alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=for-the-badge&logo=adobeacrobatreader&logoColor=white"></a>
-        <a href="CV-academic.pdf" class="badge-img"><img height="28" alt="Academic CV" src="https://img.shields.io/badge/Academic%20CV-2563EB?style=for-the-badge&logo=adobeacrobatreader&logoColor=white"></a>
-        <a href="C++-Overview.pdf" class="badge-img"><img height="28" alt="Portfolio Slides" src="https://img.shields.io/badge/Portfolio%20Slides-7C3AED?style=for-the-badge&logo=googledrive&logoColor=white"></a>
+      <!-- ABOUT ME (previously Documents) -->
+      <div class="label" aria-hidden="true">About me</div>
+      <div class="aboutme" aria-label="About me documents">
+        <a class="btn-doc btn-cv" href="CV.pdf" target="_blank" rel="noopener">
+          <span>📄 Professional CV</span><span class="tag">PDF</span>
+        </a>
+        <a class="btn-doc btn-cv-ac" href="CV-academic.pdf" target="_blank" rel="noopener">
+          <span>🎓 Academic CV</span><span class="tag">PDF</span>
+        </a>
+        <a class="btn-doc btn-slides" href="C++-Overview.pdf" target="_blank" rel="noopener">
+          <span>🖥️ Portfolio Slides</span><span class="tag">PDF</span>
+        </a>
       </div>
     </section>
 
@@ -226,7 +251,7 @@
       <div class="mono">pandas · numpy · matplotlib · scikit-learn · SciPy · Jupyter</div>
     </section>
 
-    <!-- DOCS -->
+    <!-- DOCS (kept for clarity; optional to remove) -->
     <section id="docs" class="section">
       <h2>📄 CV & Slides</h2>
       <p>Download my latest CVs and portfolio slides.</p>
