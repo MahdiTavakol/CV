@@ -86,7 +86,7 @@ It highlights my approach to **high-performance numerical software** in C++ (C++
 | [🌀 **ModernCppProjects**](https://github.com/MahdiTavakol/ModernCppProjects) | C++ projects demonstrating **architecture**, **parallelism**, and **performance** (e.g. Mandelbrot renderer). |
 | [🧪 **LAMMPS-Constant-pH**](https://github.com/MahdiTavakol/LAMMPS-Constant-pH) | C++ extensions for **constant-pH MD** with robust HPC integration. |
 | [⛰️ **MetaDynamics / TI**](https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025) | Adaptive biasing and thermodynamic integration methods. |
-| [🧠 **NeuralNetwork (C++)**](https://github.com/MahdiTavakol/ModernCppProjects) | Eigen-powered neural network with **RAII** and **OpenMP/MPI** acceleration. |
+| [🧠 **NeuralNetwork (C++)**](https://github.com/MahdiTavakol/ModernCppProjects/tree/master/NeuralNetwork/NeuralNetwork) | Eigen-powered neural network with **RAII** and **OpenMP/MPI** acceleration. |
 
 ---
 
