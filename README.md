@@ -98,7 +98,7 @@ cmake --build build-debug -j
 _Postdoctoral Researcher • Computational Scientist_  
 📧 **mahditavakol90@gmail.com**
 
-I’m keen to bring my **modern C++ engineering** and **numerical simulation** experience  
+I’m keen to bring my **C**, **modern C++ engineering**, **CUDA C** and **numerical simulation** experience  
 to **software** development roles.
 
 ---
