@@ -1,362 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</title>
-<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science. Portfolio of Mahdi Tavakol with CVs, slides, GitHub, Kaggle." />
-<style>
-  :root{
-    --bg:#0a0b10; --text:#e8ecf2; --muted:#a9b4c2; --border:#222634;
-    --panel:#10121a; --card:#121624; --link:#8ab4ff;
-    --accent:#7c3aed; --accent2:#60a5fa; --good:#10b981; --warn:#f59e0b;
-
-    /* Tuning for showcase */
-    --peek: 8vw;            /* how much left/right cards peek */
-    --center-scale: 1.10;   /* zoom for the centered card */
-    --side-scale: 0.96;     /* slight shrink for non-centered cards */
-    --snap-gap: 16px;       /* gap between cards */
-  }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#ffffff; --text:#0f172a; --muted:#465366; --border:#e5e7eb; --panel:#f7f8fa; --card:#ffffff; --link:#1d4ed8; }
-  }
-  *{ box-sizing:border-box; }
-  html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica Neue,Arial; }
-  html{ scroll-behavior:smooth; }
-
-  /* ===== Sticky Nav ===== */
-  header{
-    position:sticky; top:0; z-index:60;
-    backdrop-filter: blur(8px);
-    background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.08));
-    border-bottom:1px solid var(--border);
-  }
-  .nav{
-    max-width:1200px; margin:0 auto; padding:10px 16px;
-    display:flex; align-items:center; gap:12px;
-  }
-  .brand{ font-weight:800; letter-spacing:.3px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); }
-  .nav a{ color:var(--muted); text-decoration:none; font-weight:600; font-size:14px; padding:8px 10px; border-radius:8px; }
-  .nav a:hover{ color:var(--text); background:rgba(255,255,255,.06); }
-  .spacer{ flex:1; }
-  .cta{ background:linear-gradient(135deg,#7C3AED,#A78BFA); color:#fff !important; border:1px solid var(--border); }
-
-  /* ===== HERO (video) ===== */
-  .hero{
-    position:relative; height:100svh; overflow:hidden; border-bottom:1px solid var(--border);
-    scroll-snap-align:start; scroll-snap-stop:always;
-  }
-  .hero video{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; filter:brightness(.55) contrast(1.05) saturate(1.08);
-  }
-  .hero .overlay{
-    position:absolute; inset:0;
-    background:
-      radial-gradient(1200px 600px at 10% 20%, rgba(59,130,246,.35), transparent 60%),
-      radial-gradient(1000px 600px at 80% 10%, rgba(167,139,250,.35), transparent 60%),
-      linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55) 60%, rgba(0,0,0,.85));
-    pointer-events:none;
-  }
-  .hero-inner{
-    position:relative; z-index:2; height:100%; display:grid; place-items:center; text-align:center; padding:0 16px;
-  }
-  .title{ font-size:clamp(28px,5vw,56px); margin:0 0 10px; letter-spacing:.2px; }
-  .subtitle{ margin:0 0 18px; color:var(--muted); font-size:clamp(14px,2.2vw,18px); }
-
-  .label{
-    display:inline-block; margin: 8px 0 8px; padding: 4px 10px;
-    font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:999px;
-    background:rgba(0,0,0,.2);
-  }
-  .badges{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-  .badge-img img{ height:30px; display:block; }
-
-  .row{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:10px 0 0; }
-  .pill{
-    display:inline-flex; align-items:center; gap:10px; padding:10px 14px;
-    border-radius:999px; border:1px solid var(--border); text-decoration:none; color:#fff;
-    box-shadow:0 6px 20px rgba(0,0,0,.25); font-weight:800; font-size:14px; letter-spacing:.2px;
-    transition:transform 140ms ease, filter 140ms ease;
-  }
-  .pill:hover{ transform:translateY(-1px); filter:brightness(1.07); text-decoration:none; }
-  .ln{ background:linear-gradient(135deg,#0A66C2,#2E8AE6); }
-  .gh{ background:linear-gradient(135deg,#111,#2a2a2a); }
-  .kg{ background:linear-gradient(135deg,#20BEFF,#55D0FF); color:#0b2b40; }
-  .cv{ background:linear-gradient(135deg,#0F766E,#34D399); }
-  .acv{ background:linear-gradient(135deg,#2563EB,#60A5FA); }
-  .slides{ background:linear-gradient(135deg,#7C3AED,#A78BFA); }
-  .pptx{ background:linear-gradient(135deg,#D35230,#E07B5D); }
-  .tag{ font-size:11px; padding:2px 8px; border-radius:999px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.18); }
-
-  .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.9; }
-
-  /* ===== Vertical snap for sections ===== */
-  main{ scroll-snap-type: y mandatory; }
-
-  /* ===== Generic vertical section panels (after showcase) ===== */
-  section.block{
-    min-height:100svh; display:grid; place-items:center; padding:24px 16px;
-    scroll-snap-align:start; scroll-snap-stop:always; border-bottom:1px solid var(--border);
-    position:relative;
-  }
-  .panel{
-    width:min(1200px, 94vw);
-    min-height:86svh;
-    border-radius:18px; border:1px solid var(--border); background:var(--panel);
-    padding:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.03) inset;
-    position:relative; overflow:hidden;
-  }
-  .panel .inner{ position:relative; z-index:2; }
-  .h2{ font-size:22px; margin:0 0 10px; }
-  .lead{ color:var(--muted); margin:0 0 18px; }
-  .grid{ display:grid; gap:12px; }
-  @media (min-width:850px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
-  .card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; }
-  .card h3{ margin:0 0 6px; font-size:16px; }
-  .card p{ margin:0; color:var(--muted); font-size:14px; }
-  .btn{ display:inline-block; margin-top:8px; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
-
-  /* ===== SHOWCASE (Section 2): Horizontal snap with peeking & zoom center ===== */
-  .showcase{
-    min-height:100svh; display:grid; place-items:center; padding:0;
-    scroll-snap-align:start; scroll-snap-stop:always; border-bottom:1px solid var(--border);
-    position:relative;
-    background:
-      radial-gradient(900px 600px at 10% 20%, rgba(96,165,250,.25), transparent 60%),
-      radial-gradient(900px 600px at 80% 85%, rgba(124,58,237,.25), transparent 60%);
-  }
-  .hshell{
-    width:100%; height:100%;
-    display:grid; place-items:center;
-    padding:0 var(--peek);
-    position:relative;
-  }
-  .rail{
-    display:flex; gap:var(--snap-gap); align-items:center;
-    width:100%;
-    overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -ms-overflow-style:none;
-    scroll-snap-type:x mandatory; scroll-padding-inline:var(--peek);
-    overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch;
-    padding: 6vh 0;
-  }
-  .rail::-webkit-scrollbar{ display:none; }
-
-  .hcard{
-    flex:0 0 auto;
-    width: clamp(320px, 72vw, 980px);
-    aspect-ratio: 16/9;
-    border-radius:18px; border:1px solid var(--border);
-    background:var(--panel);
-    position:relative; overflow:hidden;
-    scroll-snap-align:center; scroll-snap-stop:always;
-    text-decoration:none; color:inherit;
-    box-shadow:0 10px 24px rgba(0,0,0,.30), 0 0 0 1px rgba(255,255,255,.03) inset;
-    transform: scale(var(--side-scale));
-    opacity: .85;
-    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease, filter .25s ease;
-    will-change: transform;
-  }
-  .hcard .hthumb{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.88) saturate(1.06);
-    -webkit-user-drag:none; user-drag:none; pointer-events:none;
-    transition: transform .35s ease, filter .25s ease;
-  }
-  .hcard:hover .hthumb{ transform: scale(1.03); }
-
-  /* Zoomed center card */
-  .hcard.is-center{
-    transform: scale(var(--center-scale));
-    opacity: 1;
-    box-shadow: 0 16px 42px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.05) inset;
-    z-index: 2;
-  }
-  .hcard.is-center .hthumb{
-    filter:brightness(.95) saturate(1.12);
-  }
-
-  /* Optional arrow hints */
-  .hint{
-    position:absolute; top:50%; transform:translateY(-50%);
-    width:44px; height:44px; display:grid; place-items:center;
-    border-radius:999px; border:1px solid var(--border); background:rgba(0,0,0,.3); color:#fff;
-    opacity:.75; user-select:none;
-  }
-  .hint:hover{ opacity:1; }
-  .left-hint{ left:12px; }
-  .right-hint{ right:12px; }
-  .hint svg{ width:18px; height:18px; }
-
-  footer{ padding:28px 16px 40px; text-align:center; color:var(--muted); font-size:13px; }
-</style>
-</head>
-<body>
-
-<header>
-  <nav class="nav">
-    <div class="brand">Mahdi Tavakol</div>
-    <div class="spacer"></div>
-    <a href="#showcase">Showcase</a>
-    <a href="#repos">Projects</a>
-    <a href="#aboutme">About me</a>
-    <a class="cta" href="contact.html">Contact</a>
-  </nav>
-</header>
-
-<!-- ===== HERO ===== -->
-<section class="hero" id="home" aria-label="hero">
-  <!-- 🔴 HERO VIDEO FILES GO HERE -->
-  <!-- Put your files in /assets/: hero.mp4 (H.264) and optional hero.webm, plus a poster image -->
-  <video id="bgvid" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
-    <source src="assets/hero.webm" type="video/webm">
-    <source src="assets/hero.mp4" type="video/mp4">
-    <!-- Fallback text shown only if video can't load -->
-    Your browser does not support the video tag.
-  </video>
-  <!-- 🔴 End of video block -->
-
-  <div class="overlay" aria-hidden="true"></div>
-
-  <div class="hero-inner">
-    <div>
-      <h1 class="title">🧭 Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</h1>
-      <p class="subtitle"><strong>Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Linux Toolchains</strong></p>
-
-      <div class="label">Tech stack</div>
-      <div class="badges" id="stack">
-        <a href="https://en.cppreference.com/w/" target="_blank" class="badge-img"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=for-the-badge"></a>
-        <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
-        <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
-        <a href="https://www.mpi-forum.org/" target="_blank" class="badge-img"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=for-the-badge"></a>
-        <a href="https://developer.nvidia.com/cuda-zone" target="_blank" class="badge-img"><img alt="CUDA" src="https://img.shields.io/badge/CUDA-GPU%20Computing-76B900?logo=nvidia&logoColor=white&style=for-the-badge"></a>
-        <a href="https://cmake.org/" target="_blank" class="badge-img"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=for-the-badge"></a>
-        <a href="https://www.kernel.org/linux.html" target="_blank" class="badge-img"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=for-the-badge"></a>
-      </div>
-
-      <div class="label">My profiles</div>
-      <div class="row">
-        <a class="pill ln" href="https://www.linkedin.com/in/mahditavakol/" target="_blank">🔗 LinkedIn <span class="tag">My profile</span></a>
-        <a class="pill gh" href="https://github.com/MahdiTavakol" target="_blank">🐙 GitHub <span class="tag">My profile</span></a>
-        <a class="pill kg" href="https://www.kaggle.com/mahditavakol/code" target="_blank">🧪 Kaggle <span class="tag">My notebooks</span></a>
-      </div>
-
-      <div class="label">About me</div>
-      <div class="row">
-        <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
-        <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
-        <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
-        <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="scroll-cue">Scroll ↓</div>
-</section>
-
-<main>
-  <!-- ===== SECTION 2: SHOWCASE (Horizontal snap + zoom center) ===== -->
-  <section class="showcase" id="showcase" aria-label="showcase">
-    <div class="hshell">
-      <button class="hint left-hint" id="leftBtn" aria-label="Scroll left">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <button class="hint right-hint" id="rightBtn" aria-label="Scroll right">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-
-      <div class="rail" id="rail">
-        <!-- Replace thumbnails and links with your own -->
-        <a class="hcard" href="C++-Overview.pdf" target="_blank" title="Portfolio Slides (PDF)">
-          <img class="hthumb" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Slides preview">
-          <div class="hshade"></div>
-          <div class="hmeta"><h3>Portfolio Slides</h3><p>PDF deck</p></div>
-        </a>
-        <a class="hcard" href="https://github.com/MahdiTavakol/ModernCppProjects" target="_blank" title="ModernCppProjects">
-          <img class="hthumb" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Projects">
-          <div class="hshade"></div>
-          <div class="hmeta"><h3>Modern C++ Projects</h3><p>Architecture • Performance</p></div>
-        </a>
-        <a class="hcard" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH" target="_blank" title="LAMMPS Constant-pH">
-          <img class="hthumb" src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
-          <div class="hshade"></div>
-          <div class="hmeta"><h3>Constant-pH MD (LAMMPS)</h3><p>HPC integration</p></div>
-        </a>
-        <a class="hcard" href="https://www.kaggle.com/mahditavakol/code" target="_blank" title="Kaggle Notebooks">
-          <img class="hthumb" src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
-          <div class="hshade"></div>
-          <div class="hmeta"><h3>Kaggle</h3><p>Python notebooks</p></div>
-        </a>
-        <a class="hcard" href="C++-Overview.pptx" target="_blank" title="Portfolio Slides (PPTX)">
-          <img class="hthumb" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides PPTX">
-          <div class="hshade"></div>
-          <div class="hmeta"><h3>Slides (PPTX)</h3><p>Editable</p></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== VERTICAL PANELS ===== -->
-  <section class="block" id="repos" aria-label="projects">
-    <div class="panel">
-      <div class="inner">
-        <h2 class="h2">🗂 Featured Repositories</h2>
-        <div class="grid">
-          <div class="card">
-            <h3>🌀 ModernCppProjects</h3>
-            <p>C++ projects demonstrating architecture, parallelism, and performance (e.g., Mandelbrot renderer).</p>
-            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects">View repository</a>
-          </div>
-          <div class="card">
-            <h3>🧪 LAMMPS-Constant-pH</h3>
-            <p>C++ extensions for constant-pH MD with robust HPC integration.</p>
-            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH">View repository</a>
-          </div>
-          <div class="card">
-            <h3>⛰️ MetaDynamics / TI</h3>
-            <p>Adaptive biasing and thermodynamic integration methods.</p>
-            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025">View repository</a>
-          </div>
-          <div class="card">
-            <h3>🧠 NeuralNetwork (C++)</h3>
-            <p>Eigen-powered neural network with RAII and OpenMP/MPI acceleration.</p>
-            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects/tree/master/NeuralNetwork/NeuralNetwork">View subfolder</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="aboutme" aria-label="about-me">
-    <div class="panel">
-      <div class="inner">
-        <h2 class="h2">📄 About me</h2>
-        <p class="lead">CVs and slide deck for quick review.</p>
-        <div class="row">
-          <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
-          <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
-          <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
-          <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="contact" aria-label="contact">
-    <div class="panel">
-      <div class="inner">
-        <h2 class="h2">🗣️ Contact</h2>
-        <p class="lead"><strong>Mahdi Tavakol</strong> — Postdoctoral Researcher • Computational Scientist</p>
-        <p class="lead">Email: mahditavakol90 [at] gmail [dot] com</p>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  © <span id="year"></span> Mahdi Tavakol • <a href="https://github.com/MahdiTavakol" target="_blank" style="color:inherit">GitHub</a> • <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank" style="color:inherit">LinkedIn</a>
-</footer>
-
 <script>
   // Respect reduced motion
   const vid = document.getElementById('bgvid');
@@ -368,7 +9,15 @@
     const next = document.getElementById('showcase');
     if(!hero || !next) return;
     let fired = false;
-    const goNext = ()=>{ if(fired) return; fired = true; next.scrollIntoView({behavior:'smooth'}); setTimeout(()=>fired=false, 800); };
+
+    // After auto-scroll, center the first card
+    const goNext = ()=>{
+      if (fired) return; fired = true;
+      next.scrollIntoView({behavior:'smooth'});
+      // Allow the section to settle, then center first
+      setTimeout(()=>{ window.centerShowcaseFirst?.(); fired = false; }, 700);
+    };
+
     hero.addEventListener('wheel',(e)=>{ if(e.deltaY>12){ e.preventDefault(); goNext(); }},{passive:false});
     hero.addEventListener('keydown',(e)=>{ if(['ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); goNext(); }});
     let sy=null;
@@ -378,12 +27,62 @@
     hero.tabIndex=-1; hero.focus({preventScroll:true});
   })();
 
-  // Horizontal rail behavior + CENTER ZOOM selection
+  // ===== Horizontal rail behavior + CENTER ZOOM selection + FORCE FIRST CENTER =====
   (function(){
     const rail = document.getElementById('rail');
     const leftBtn = document.getElementById('leftBtn');
     const rightBtn = document.getElementById('rightBtn');
-    if(!rail) return;
+    const showcase = document.getElementById('showcase');
+    if(!rail || !showcase) return;
+
+    const cards = Array.from(rail.querySelectorAll('.hcard'));
+
+    // Utility: apply "is-center" to the card whose center is closest to rail center
+    function currentCenterIndex(){
+      const railRect = rail.getBoundingClientRect();
+      const railCenter = railRect.left + railRect.width/2;
+      let bestIdx=0, bestDist=Infinity;
+      cards.forEach((c,i)=>{
+        const r=c.getBoundingClientRect();
+        const d=Math.abs((r.left + r.width/2) - railCenter);
+        if(d<bestDist){ bestDist=d; bestIdx=i; }
+      });
+      return bestIdx;
+    }
+    function selectCenter(){
+      const idx = currentCenterIndex();
+      cards.forEach((c,i)=> c.classList.toggle('is-center', i===idx));
+    }
+
+    // Precisely center card by index (no rounding issues)
+    function centerCardByIndex(idx, behavior='smooth'){
+      const card = cards[idx];
+      if(!card) return;
+      // scrollLeft so that card center aligns to rail center
+      const target = card.offsetLeft + card.offsetWidth/2 - rail.clientWidth/2;
+      rail.scrollTo({ left: target, behavior });
+      // set class after a tick
+      setTimeout(selectCenter, behavior === 'smooth' ? 250 : 0);
+    }
+
+    // Expose for the hero auto-scroll to call
+    window.centerShowcaseFirst = ()=> centerCardByIndex(0, 'smooth');
+
+    // On page load (after images decode), center first card
+    const imgs = Array.from(rail.querySelectorAll('img'));
+    Promise.allSettled(imgs.map(img => img.decode?.() ?? Promise.resolve()))
+      .finally(()=>{ centerCardByIndex(0, 'instant'); });
+
+    // When showcase becomes visible (e.g., user scrolls manually), center first once
+    let centeredOnEnter = false;
+    new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting && !centeredOnEnter){
+          centeredOnEnter = true;
+          centerCardByIndex(0, 'smooth');
+        }
+      });
+    }, { root: null, threshold: 0.6 }).observe(showcase);
 
     // Convert vertical wheel to horizontal scroll on the rail
     rail.addEventListener('wheel', (e)=>{
@@ -397,6 +96,7 @@
     let down=false, sx=0, sl=0, vel=0, raf=null, lx=0, lt=0;
     const stop=()=>{ if(raf){ cancelAnimationFrame(raf); raf=null; } };
     const momentum=()=>{ rail.scrollLeft -= vel; vel*=0.95; if(Math.abs(vel)>0.3){ raf=requestAnimationFrame(momentum); } else { selectCenter(); } };
+
     rail.addEventListener('mousedown', (e)=>{ down=true; sx=e.pageX; sl=rail.scrollLeft; stop(); lx=sx; lt=performance.now(); rail.style.cursor='grabbing'; });
     window.addEventListener('mousemove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.pageX-sx; rail.scrollLeft=sl-dx; vel=(e.pageX-lx)/(now-lt)*16; lx=e.pageX; lt=now; selectCenter(); });
     window.addEventListener('mouseup', ()=>{ if(!down) return; down=false; rail.style.cursor='grab'; stop(); momentum(); });
@@ -406,40 +106,14 @@
     rail.addEventListener('touchmove', (e)=>{ if(!down) return; const now=performance.now(); const dx=e.touches[0].pageX-sx; rail.scrollLeft=sl-dx; vel=(e.touches[0].pageX-lx)/(now-lt)*16; lx=e.touches[0].pageX; lt=now; selectCenter(); }, {passive:true});
     rail.addEventListener('touchend', ()=>{ if(!down) return; down=false; stop(); momentum(); });
 
-    // Arrow buttons move by one card
+    // Arrow buttons move by one card (from current center)
     function moveByCard(dir){
-      const cards = Array.from(rail.querySelectorAll('.hcard'));
-      if(cards.length===0) return;
-      const idx = currentCenterIndex(cards);
+      const idx = currentCenterIndex();
       const targetIdx = Math.max(0, Math.min(cards.length-1, idx + dir));
-      cards[targetIdx].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-      // Wait a bit then update center class
-      setTimeout(selectCenter, 350);
+      centerCardByIndex(targetIdx, 'smooth');
     }
     leftBtn.addEventListener('click', ()=>moveByCard(-1));
     rightBtn.addEventListener('click', ()=>moveByCard(+1));
-
-    // Helper: find index of the card closest to rail center
-    function currentCenterIndex(cards){
-      const railRect = rail.getBoundingClientRect();
-      const railCenter = railRect.left + railRect.width/2;
-      let bestIdx=0, bestDist=Infinity;
-      cards.forEach((c,i)=>{
-        const rect=c.getBoundingClientRect();
-        const center=rect.left+rect.width/2;
-        const d=Math.abs(center-railCenter);
-        if(d<bestDist){ bestDist=d; bestIdx=i; }
-      });
-      return bestIdx;
-    }
-
-    // Apply is-center class to the nearest card (for zoom/dim effect)
-    function selectCenter(){
-      const cards = Array.from(rail.querySelectorAll('.hcard'));
-      if(cards.length===0) return;
-      const idx = currentCenterIndex(cards);
-      cards.forEach((c,i)=> c.classList.toggle('is-center', i===idx));
-    }
 
     // Update on scroll (throttled via rAF)
     let ticking=false;
@@ -447,15 +121,13 @@
       if(!ticking){ requestAnimationFrame(()=>{ selectCenter(); ticking=false; }); ticking=true; }
     });
 
-    // Recalculate on resize and after load
-    window.addEventListener('resize', ()=>{ setTimeout(selectCenter, 100); });
-    window.addEventListener('load', selectCenter);
-    // Initial selection if images cached
+    // Recalculate on resize
+    window.addEventListener('resize', ()=>{ setTimeout(()=>centerCardByIndex(currentCenterIndex(), 'instant'), 80); });
+
+    // Initial selection (in case images already cached)
     selectCenter();
   })();
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-</body>
-</html>
