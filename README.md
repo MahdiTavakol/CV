@@ -136,21 +136,27 @@ cmake --build build-debug -j
 ```
 
 
+---
 
-🗣️ Contact
+## 🗣️ Contact
 
-Mahdi Tavakol
-Postdoctoral Researcher • Computational Scientist
-📧 mahdi.tavakol@eng.ox.ac.uk
+**Mahdi Tavakol**  
+_Postdoctoral Researcher • Computational Scientist_  
+📧 **mahdi.tavakol@eng.ox.ac.uk**
 
-I’m keen to bring my modern C++ engineering and numerical simulation experience
-to GNC, robotics, and scientific software development roles.
+I’m keen to bring my **modern C++ engineering** and **numerical simulation** experience  
+to **GNC**, **robotics**, and **scientific software** development roles.
 
-📝 Notes
+---
 
-📄 If PDFs don’t preview in your browser, download and open them locally.
-⚙️ Some projects rely on newer compilers or libraries (e.g., C++20+).
+## 📝 Notes
+
+📄 If PDFs don’t preview in your browser, download and open them locally.  
+⚙️ Some projects rely on newer compilers or libraries (e.g., **C++20+**).  
 Check each repository’s README for detailed build requirements.
+
+---
+
 
 
 
