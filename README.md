@@ -2,12 +2,24 @@
 <p align="center"><strong>Modern C++ • Parallelism • RAII • Numerical Algorithms • Linux Toolchains</strong></p>
 
 <p align="center" style="margin: 0; padding: 0;">
-  <a href="#"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white"></a>
-  <a href="#"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2"></a>
-  <a href="#"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5"></a>
-  <a href="#"><img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F"></a>
-  <a href="#"><img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake"></a>
-  <a href="#"><img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white"></a>
+  <a href="https://en.cppreference.com/w/" target="_blank">
+    <img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=flat-square">
+  </a>
+  <a href="https://eigen.tuxfamily.org/" target="_blank">
+    <img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=flat-square">
+  </a>
+  <a href="https://www.openmp.org/" target="_blank">
+    <img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=flat-square">
+  </a>
+  <a href="https://www.mpi-forum.org/" target="_blank">
+    <img alt="MPI" src="https://img.shields.io/badge/MPI-Distributed-00838F?style=flat-square">
+  </a>
+  <a href="https://cmake.org/" target="_blank">
+    <img alt="CMake" src="https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&style=flat-square">
+  </a>
+  <a href="https://www.kernel.org/linux.html" target="_blank">
+    <img alt="Linux" src="https://img.shields.io/badge/Linux-Dev%20Env-242938?logo=linux&logoColor=white&style=flat-square">
+  </a>
 </p>
 
 <p align="center" style="margin: 0; padding: 0;">
