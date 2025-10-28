@@ -135,7 +135,7 @@ cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build build-debug -j
 
 
----
+
 
 ## 🗣️ Contact
 
@@ -146,7 +146,7 @@ _Postdoctoral Researcher • Computational Scientist_
 I’m keen to bring my **modern C++ engineering** and **numerical simulation** experience  
 to **GNC**, **robotics**, and **scientific software** development roles.
 
----
+
 
 ## 📝 Notes
 
@@ -154,7 +154,7 @@ to **GNC**, **robotics**, and **scientific software** development roles.
 ⚙️ Some projects rely on newer compilers or libraries (e.g., **C++20+**).  
 Check each repository’s README for detailed build requirements.
 
----
+
 
 
 
