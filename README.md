@@ -19,3 +19,4 @@ prepared for the Capgemini Engineering — Software Engineer (GNC) interview (20
 ➡️ Visit my main repositories for source code:
 - [ModernCppProjects](https://github.com/MahdiTavakol/ModernCppProjects)
 - [LAMMPS-Constant-pH](https://github.com/MahdiTavakol/LAMMPS-Constant-pH)
+- [LAMMPS-metaDynamic and Thermodynamic-integration](https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025)
