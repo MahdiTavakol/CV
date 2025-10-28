@@ -23,7 +23,7 @@
   </a>
 </p>
 
----
+
 
 <p align="center" style="margin: 0; padding: 0;">
   <a href="CV.pdf"><img alt="Professional CV" src="https://img.shields.io/badge/Professional%20CV-0F766E?style=flat&logo=adobeacrobatreader&logoColor=white"></a>
