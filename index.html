@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mahdi Tavakol — C++ • Python • Software Engineering Portfolio</title>
-<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Linux Toolchains • Data Science • Portfolio of Mahdi Tavakol" />
+<meta name="description" content="Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Portfolio of Mahdi Tavakol" />
 <style>
   :root{
     --bg:#0a0b10; --text:#e8ecf2; --muted:#a9b4c2; --border:#222634;
@@ -23,7 +23,7 @@
     position:sticky; top:0; z-index:50;
     backdrop-filter: blur(8px);
     background:linear-gradient(to bottom, rgba(0,0,0,.55), rgba(0,0,0,.08));
-    border-bottom:1px solid rgba(255,255,255,.06);
+    border-bottom:1px solid var(--border);
   }
   .nav{
     max-width:1200px; margin:0 auto; padding:10px 16px;
@@ -43,7 +43,6 @@
   .layer{
     position:absolute; inset:0; background-position:center; background-size:cover; will-change:transform; pointer-events:none; opacity:.28;
   }
-  /* Replace these gradient layers with subtle textures or photos if you want */
   .l1{ background-image:radial-gradient(1000px 600px at 10% 20%, #3b82f6 0%, transparent 60%); }
   .l2{ background-image:radial-gradient(800px 500px at 80% 10%, #a78bfa 0%, transparent 60%); mix-blend-mode:screen; }
   .l3{ background-image:radial-gradient(900px 700px at 50% 80%, #10b981 0%, transparent 65%); mix-blend-mode:screen; }
@@ -93,16 +92,22 @@
   .reveal{ opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.show{ opacity:1; transform:none; }
 
-  /* ====== DRAG GALLERY (ATS-like feel) ====== */
+  /* ====== DRAG GALLERY (FIXED) ====== */
   .gallery{
-    user-select:none; -webkit-user-select:none; -ms-user-select:none;
-    overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--panel);
+    border:1px solid var(--border); border-radius:14px; background:var(--panel);
+    overflow:hidden;
   }
+  /* The TRACK is now the SCROLL CONTAINER */
   .track{
-    display:flex; gap:10px; padding:12px; cursor:grab;
-    will-change:transform;
+    display:flex; gap:10px; padding:12px;
+    overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
+    -ms-overflow-style:none; /* IE */
+    overscroll-behavior-x: contain; /* stop rubber-banding on touchpads */
+    cursor:grab;
   }
+  .track::-webkit-scrollbar{ display:none; }
   .track.dragging{ cursor:grabbing; }
+
   .card-img{
     flex:0 0 auto; width: clamp(260px, 36vw, 520px); aspect-ratio: 16/9;
     border-radius:12px; overflow:hidden; background:var(--card); border:1px solid var(--border);
@@ -112,6 +117,7 @@
     width:100%; height:100%; object-fit:cover; display:block;
     filter:contrast(1.03) saturate(1.03);
     transition:transform .3s ease, filter .3s ease;
+    -webkit-user-drag:none; user-drag:none; pointer-events:none; /* prevents browser image-drag ghost */
   }
   .card-img:hover img{ transform:scale(1.03); }
 
@@ -154,7 +160,7 @@
     <p class="subtitle"><strong>Modern C++ • CUDA • RAII • Parallelism • Numerical Algorithms • Data Science • Linux Toolchains</strong></p>
 
     <div class="label">Tech stack</div>
-    <div class="badges">
+    <div class="badges" id="stack">
       <a href="https://en.cppreference.com/w/" target="_blank" class="badge-img"><img alt="C++" src="https://img.shields.io/badge/C%2B%2B-17%2F20-00599C?logo=c%2B%2B&logoColor=white&style=for-the-badge"></a>
       <a href="https://eigen.tuxfamily.org/" target="_blank" class="badge-img"><img alt="Eigen" src="https://img.shields.io/badge/Eigen-Linear%20Algebra-7E57C2?style=for-the-badge"></a>
       <a href="https://www.openmp.org/" target="_blank" class="badge-img"><img alt="OpenMP" src="https://img.shields.io/badge/OpenMP-Parallelism-1E88E5?style=for-the-badge"></a>
@@ -183,29 +189,30 @@
   <div class="scroll-cue">Scroll ↓ Drag the gallery</div>
 </section>
 
-<!-- ====== SHOWCASE: Drag-to-scroll Gallery ====== -->
+<!-- ====== SHOWCASE: Drag-to-scroll Gallery (FIXED) ====== -->
 <section class="block" id="gallery" aria-label="showcase">
   <div class="container">
     <h2 class="h2 reveal">🖼️ Interactive Showcase</h2>
     <p class="lead reveal">Click and drag (or swipe) to browse featured visuals — code snapshots, slides, or project images.</p>
 
     <div class="gallery reveal">
+      <!-- TRACK is the scroll container -->
       <div class="track" id="dragTrack">
-        <!-- Replace image src with your own assets -->
+        <!-- Replace image src with your assets; draggable=false prevents browser ghost-drag -->
         <a class="card-img" href="C++-Overview.pdf" target="_blank" title="Portfolio Slides">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Code & terminal">
+          <img draggable="false" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop" alt="Code & terminal">
         </a>
         <a class="card-img" href="https://github.com/MahdiTavakol/ModernCppProjects" target="_blank" title="Modern C++ Projects">
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Editor">
+          <img draggable="false" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="C++ Editor">
         </a>
         <a class="card-img" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH" target="_blank" title="LAMMPS Constant-pH">
-          <img src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
+          <img draggable="false" src="https://images.unsplash.com/photo-1605379399642-870262d3d051?q=80&w=1600&auto=format&fit=crop" alt="Simulation">
         </a>
         <a class="card-img" href="https://www.kaggle.com/mahditavakol/code" target="_blank" title="Kaggle Notebooks">
-          <img src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
+          <img draggable="false" src="https://images.unsplash.com/photo-1550645612-83f2d0f9b1f4?q=80&w=1600&auto=format&fit=crop" alt="Data plots">
         </a>
         <a class="card-img" href="C++-Overview.pptx" target="_blank" title="Slides PPTX">
-          <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides">
+          <img draggable="false" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1600&auto=format&fit=crop" alt="Slides">
         </a>
       </div>
     </div>
@@ -290,7 +297,6 @@
       const depth = parseFloat(el.dataset.depth || 0.2);
       el.style.transform = `translateY(${y * depth * -0.25}px)`;
     });
-    requestAnimationFrame(()=>{ /* noop to keep smoothness */ });
   }
   window.addEventListener('scroll', parallax, {passive:true});
 
@@ -302,11 +308,12 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  // ===== Drag-to-scroll gallery (mouse & touch)
+  // ===== Drag-to-scroll gallery (mouse & touch) — FIXED
   (function(){
     const track = document.getElementById('dragTrack');
     if(!track) return;
-    let isDown=false, startX=0, scrollLeft=0, vel=0, raf=null, lastX=0, lastT=0;
+
+    let isDown=false, startX=0, startScrollLeft=0, vel=0, raf=null, lastX=0, lastT=0;
 
     const stopMomentum = ()=>{ if(raf){ cancelAnimationFrame(raf); raf=null; } };
     const momentum = ()=>{
@@ -316,13 +323,21 @@
       else { raf=null; }
     };
 
-    const onDown = (x)=>{ isDown=true; track.classList.add('dragging'); startX=x; scrollLeft=track.scrollLeft; stopMomentum(); lastX=x; lastT=performance.now(); };
-    const onMove = (x)=>{
+    const onDown = (x)=>{
+      isDown=true;
+      track.classList.add('dragging');
+      startX=x;
+      startScrollLeft=track.scrollLeft;
+      stopMomentum();
+      lastX=x; lastT=performance.now();
+    };
+    const onMove = (x, e)=>{
       if(!isDown) return;
+      if(e) e.preventDefault(); // prevent text/image selection on drag
       const now = performance.now();
       const walk = (x - startX);
-      track.scrollLeft = scrollLeft - walk;
-      vel = (x - lastX) / (now - lastT) * 16; // px per frame approx
+      track.scrollLeft = startScrollLeft - walk;
+      vel = (x - lastX) / (now - lastT) * 16; // px/frame approx
       lastX = x; lastT = now;
     };
     const onUp = ()=>{
@@ -333,12 +348,12 @@
 
     // Mouse
     track.addEventListener('mousedown',(e)=>onDown(e.pageX));
-    window.addEventListener('mousemove',(e)=>onMove(e.pageX));
+    track.addEventListener('mousemove',(e)=>onMove(e.pageX, e));
     window.addEventListener('mouseup',onUp);
 
     // Touch
     track.addEventListener('touchstart',(e)=>onDown(e.touches[0].pageX), {passive:true});
-    window.addEventListener('touchmove',(e)=>onMove(e.touches[0].pageX), {passive:true});
+    track.addEventListener('touchmove',(e)=>onMove(e.touches[0].pageX, e), {passive:false});
     window.addEventListener('touchend',onUp);
   })();
 
