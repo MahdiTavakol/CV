@@ -18,7 +18,7 @@
   html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica Neue,Arial; }
   html{ scroll-behavior:smooth; }
 
-  /* ===== NAV ===== */
+  /* ===== Sticky Nav ===== */
   header{
     position:sticky; top:0; z-index:60;
     backdrop-filter: blur(8px);
@@ -38,6 +38,7 @@
   /* ===== VIDEO HERO ===== */
   .hero{
     position:relative; height:100svh; overflow:hidden; border-bottom:1px solid var(--border);
+    scroll-snap-align:start; scroll-snap-stop:always;
   }
   .hero video{
     position:absolute; inset:0; width:100%; height:100%;
@@ -84,35 +85,65 @@
 
   .scroll-cue{ position:absolute; bottom:16px; left:50%; transform:translateX(-50%); color:var(--muted); font-size:12px; opacity:.9; }
 
-  /* ===== SECTION WRAPPER ===== */
-  section.block{ padding:64px 16px; border-bottom:1px solid var(--border); }
-  .container{ max-width:1200px; margin:0 auto; }
+  /* ===== Snap Scroller for sections ===== */
+  main{
+    scroll-snap-type: y mandatory; /* enables vertical snap */
+  }
+
+  /* Section wrapper with big rounded panel */
+  section.block{
+    min-height:100svh; display:grid; place-items:center; padding:24px 16px;
+    scroll-snap-align:start; scroll-snap-stop:always;
+    border-bottom:1px solid var(--border);
+    position:relative;
+  }
+  .panel{
+    width:min(1200px, 94vw);
+    min-height:86svh; /* “fills most of the page” */
+    border-radius:18px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    padding:20px;
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.35),
+      0 0 0 1px rgba(255,255,255,.03) inset;
+    position:relative;
+    overflow:hidden;
+  }
+  .panel .inner{ position:relative; z-index:2; }
+  /* Per-section backgrounds (customize as you like) */
+  .bg-grid::before,
+  .bg-purple::before,
+  .bg-blue::before,
+  .bg-green::before{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.55;
+    background-size:cover; mix-blend-mode:screen;
+  }
+  .bg-grid::before{
+    background-image:
+      radial-gradient(1px 1px at 25px 25px, rgba(255,255,255,.06) 1px, transparent 0),
+      radial-gradient(1px 1px at 0 0, rgba(255,255,255,.06) 1px, transparent 0);
+    background-size:50px 50px, 50px 50px;
+    opacity:.35;
+  }
+  .bg-purple::before{
+    background-image:radial-gradient(800px 500px at 80% 10%, #a78bfa 0%, transparent 60%);
+  }
+  .bg-blue::before{
+    background-image:radial-gradient(900px 600px at 10% 20%, #60a5fa 0%, transparent 60%);
+  }
+  .bg-green::before{
+    background-image:radial-gradient(900px 600px at 70% 80%, #10b981 0%, transparent 60%);
+  }
+
   .h2{ font-size:22px; margin:0 0 10px; }
   .lead{ color:var(--muted); margin:0 0 18px; }
-
-  /* ===== REVEAL ===== */
-  .reveal{ opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease; }
-  .reveal.show{ opacity:1; transform:none; }
-
-  /* ===== QUICK LINKS GRID ===== */
-  .links-grid{ display:grid; gap:12px; }
-  @media (min-width:850px){ .links-grid{ grid-template-columns: repeat(3, 1fr); } }
-  .link-card{
-    background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px;
-    display:flex; flex-direction:column; gap:8px;
-  }
-  .link-card h3{ margin:0; font-size:16px; }
-  .link-card p{ margin:0; color:var(--muted); font-size:14px; }
-  .btn{ display:inline-block; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
-
-  /* ===== PROJECTS GRID ===== */
   .grid{ display:grid; gap:12px; }
   @media (min-width:850px){ .grid{ grid-template-columns: repeat(2, 1fr); } }
-  .card{
-    background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px;
-  }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px; }
   .card h3{ margin:0 0 6px; font-size:16px; }
   .card p{ margin:0; color:var(--muted); font-size:14px; }
+  .btn{ display:inline-block; margin-top:8px; font-size:13px; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#0f172a22; color:var(--text); text-decoration:none; }
 
   footer{ padding:28px 16px 40px; text-align:center; color:var(--muted); font-size:13px; }
 </style>
@@ -131,13 +162,11 @@
   </nav>
 </header>
 
-<!-- ===== VIDEO HERO ===== -->
+<!-- ===== HERO (auto-scroll on wheel/touch/key) ===== -->
 <section class="hero" id="home" aria-label="hero">
-  <!-- Replace these with your files -->
   <video id="bgvid" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
     <source src="assets/hero.webm" type="video/webm">
     <source src="assets/hero.mp4" type="video/mp4">
-    <!-- Fallback text -->
   </video>
   <div class="overlay" aria-hidden="true"></div>
 
@@ -177,105 +206,159 @@
   <div class="scroll-cue">Scroll ↓</div>
 </section>
 
-<!-- ===== QUICK LINKS to other pages ===== -->
-<section class="block" id="links">
-  <div class="container">
-    <h2 class="h2 reveal">🔗 Quick Links</h2>
-    <p class="lead reveal">Jump to dedicated pages with more detail.</p>
-    <div class="links-grid">
-      <div class="link-card reveal">
-        <h3>About</h3>
-        <p>Background, research focus, and what I bring to software teams.</p>
-        <a class="btn" href="about.html">Open about.html</a>
-      </div>
-      <div class="link-card reveal">
-        <h3>Projects</h3>
-        <p>Modern C++, CUDA, numerical algorithms, and HPC work.</p>
-        <a class="btn" href="projects.html">Open projects.html</a>
-      </div>
-      <div class="link-card reveal">
-        <h3>CV & Slides</h3>
-        <p>Downloadable PDFs and PPTX of my CVs and portfolio deck.</p>
-        <a class="btn" href="cv.html">Open cv.html</a>
-      </div>
-      <div class="link-card reveal">
-        <h3>Kaggle</h3>
-        <p>Python notebooks for data analysis and ML.</p>
-        <a class="btn" target="_blank" href="https://www.kaggle.com/mahditavakol/code">Open Kaggle</a>
-      </div>
-      <div class="link-card reveal">
-        <h3>Contact</h3>
-        <p>Get in touch for roles in software engineering and simulation.</p>
-        <a class="btn" href="contact.html">Open contact.html</a>
-      </div>
-      <div class="link-card reveal">
-        <h3>GitHub</h3>
-        <p>Source code and ongoing work.</p>
-        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol">Open GitHub</a>
+<main>
+  <!-- ===== LINKS PANEL ===== -->
+  <section class="block" id="links" aria-label="links">
+    <div class="panel bg-grid">
+      <div class="inner">
+        <h2 class="h2">🔗 Quick Links</h2>
+        <p class="lead">Jump to dedicated pages with more detail.</p>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+          <div class="card">
+            <h3>About</h3><p>Background, research focus, and what I bring to software teams.</p>
+            <a class="btn" href="about.html">Open about.html</a>
+          </div>
+          <div class="card">
+            <h3>Projects</h3><p>Modern C++, CUDA, numerical algorithms, and HPC work.</p>
+            <a class="btn" href="projects.html">Open projects.html</a>
+          </div>
+          <div class="card">
+            <h3>CV & Slides</h3><p>Downloadable PDFs and PPTX of my CVs and portfolio deck.</p>
+            <a class="btn" href="cv.html">Open cv.html</a>
+          </div>
+          <div class="card">
+            <h3>Kaggle</h3><p>Python notebooks for data analysis and ML.</p>
+            <a class="btn" target="_blank" href="https://www.kaggle.com/mahditavakol/code">Open Kaggle</a>
+          </div>
+          <div class="card">
+            <h3>Contact</h3><p>Get in touch for roles in software engineering and simulation.</p>
+            <a class="btn" href="contact.html">Open contact.html</a>
+          </div>
+          <div class="card">
+            <h3>GitHub</h3><p>Source code and ongoing work.</p>
+            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol">Open GitHub</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== FEATURED REPOS ===== -->
-<section class="block" id="repos" aria-label="projects">
-  <div class="container">
-    <h2 class="h2 reveal">🗂 Featured Repositories</h2>
-    <div class="grid">
-      <div class="card reveal">
-        <h3>🌀 ModernCppProjects</h3>
-        <p>C++ projects demonstrating architecture, parallelism, and performance (e.g., Mandelbrot renderer).</p>
-        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects">View repository</a>
-      </div>
-      <div class="card reveal">
-        <h3>🧪 LAMMPS-Constant-pH</h3>
-        <p>C++ extensions for constant-pH MD with robust HPC integration.</p>
-        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH">View repository</a>
-      </div>
-      <div class="card reveal">
-        <h3>⛰️ MetaDynamics / TI</h3>
-        <p>Adaptive biasing and thermodynamic integration methods.</p>
-        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025">View repository</a>
-      </div>
-      <div class="card reveal">
-        <h3>🧠 NeuralNetwork (C++)</h3>
-        <p>Eigen-powered neural network with RAII and OpenMP/MPI acceleration.</p>
-        <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects/tree/master/NeuralNetwork/NeuralNetwork">View subfolder</a>
+  <!-- ===== REPOS PANEL ===== -->
+  <section class="block" id="repos" aria-label="projects">
+    <div class="panel bg-purple">
+      <div class="inner">
+        <h2 class="h2">🗂 Featured Repositories</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>🌀 ModernCppProjects</h3>
+            <p>C++ projects demonstrating architecture, parallelism, and performance (e.g., Mandelbrot renderer).</p>
+            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects">View repository</a>
+          </div>
+          <div class="card">
+            <h3>🧪 LAMMPS-Constant-pH</h3>
+            <p>C++ extensions for constant-pH MD with robust HPC integration.</p>
+            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH">View repository</a>
+          </div>
+          <div class="card">
+            <h3>⛰️ MetaDynamics / TI</h3>
+            <p>Adaptive biasing and thermodynamic integration methods.</p>
+            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025">View repository</a>
+          </div>
+          <div class="card">
+            <h3>🧠 NeuralNetwork (C++)</h3>
+            <p>Eigen-powered neural network with RAII and OpenMP/MPI acceleration.</p>
+            <a class="btn" target="_blank" href="https://github.com/MahdiTavakol/ModernCppProjects/tree/master/NeuralNetwork/NeuralNetwork">View subfolder</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== ABOUT ME (buttons duplicate) ===== -->
-<section class="block" id="aboutme">
-  <div class="container">
-    <h2 class="h2 reveal">📄 About me</h2>
-    <p class="lead reveal">CVs and slide deck for quick review.</p>
-    <div class="row reveal">
-      <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
-      <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
-      <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
-      <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
+  <!-- ===== ABOUT ME PANEL ===== -->
+  <section class="block" id="aboutme" aria-label="about-me">
+    <div class="panel bg-blue">
+      <div class="inner">
+        <h2 class="h2">📄 About me</h2>
+        <p class="lead">CVs and slide deck for quick review.</p>
+        <div class="row">
+          <a class="pill cv" href="CV.pdf" target="_blank">📄 Professional CV <span class="tag">PDF</span></a>
+          <a class="pill acv" href="CV-academic.pdf" target="_blank">🎓 Academic CV <span class="tag">PDF</span></a>
+          <a class="pill slides" href="C++-Overview.pdf" target="_blank">🖥️ Portfolio Slides <span class="tag">PDF</span></a>
+          <a class="pill pptx" href="C++-Overview.pptx" target="_blank">📊 Portfolio Slides <span class="tag">PPTX</span></a>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- ===== CONTACT PANEL ===== -->
+  <section class="block" id="contact" aria-label="contact">
+    <div class="panel bg-green">
+      <div class="inner">
+        <h2 class="h2">🗣️ Contact</h2>
+        <p class="lead"><strong>Mahdi Tavakol</strong> — Postdoctoral Researcher • Computational Scientist</p>
+        <p class="lead">Email: mahditavakol90 [at] gmail [dot] com</p>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>
   © <span id="year"></span> Mahdi Tavakol • <a href="https://github.com/MahdiTavakol" target="_blank" style="color:inherit">GitHub</a> • <a href="https://www.linkedin.com/in/mahditavakol/" target="_blank" style="color:inherit">LinkedIn</a>
 </footer>
 
 <script>
-  // Respect reduced motion: pause background video if requested
+  // Pause background video if reduced motion preferred
   const vid = document.getElementById('bgvid');
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     vid && vid.pause();
   }
 
-  // Reveal sections on scroll
+  // Auto-advance from HERO to the next section on first downward action
+  (function(){
+    const hero = document.getElementById('home');
+    const next = document.getElementById('links');
+    if(!hero || !next) return;
+
+    let fired = false; // avoid double firing
+    const goNext = ()=>{
+      if (fired) return;
+      fired = true;
+      next.scrollIntoView({behavior:'smooth', block:'start'});
+      setTimeout(()=>{ fired = false; }, 800); // re-arm
+    };
+
+    // Wheel (mouse/trackpad)
+    hero.addEventListener('wheel', (e)=>{
+      const dy = e.deltaY || 0;
+      if (dy > 12) { e.preventDefault(); goNext(); }
+    }, {passive:false});
+
+    // Keys
+    hero.addEventListener('keydown', (e)=>{
+      const keys = ['ArrowDown','PageDown',' '];
+      if (keys.includes(e.key)) { e.preventDefault(); goNext(); }
+    });
+
+    // Touch swipe down
+    let startY = null;
+    hero.addEventListener('touchstart', (e)=>{ startY = e.touches[0].clientY; }, {passive:true});
+    hero.addEventListener('touchmove', (e)=>{
+      if (startY === null) return;
+      const dy = startY - e.touches[0].clientY; // positive when swiping up; negative when swiping down
+      if (dy < -18) { e.preventDefault(); goNext(); startY = null; }
+    }, {passive:false});
+    hero.addEventListener('touchend', ()=>{ startY = null; });
+
+    // Make hero focusable to capture key events
+    hero.tabIndex = -1;
+    hero.focus({preventScroll:true});
+  })();
+
+  // Reveal on intersection (optional)
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
   }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('.panel').forEach(el=>io.observe(el));
 
   // Year
   document.getElementById('year').textContent = new Date().getFullYear();
