@@ -16,15 +16,13 @@
   <a href="C++-Overview.pdf"><img alt="Portfolio Slides" src="https://img.shields.io/badge/View-Portfolio%20Slides-7C3AED?style=for-the-badge&logo=googledrive&logoColor=white"></a>
   <a href="C++-Overview.pptx"><img alt="PowerPoint" src="https://img.shields.io/badge/Download-PowerPoint-9333EA?style=for-the-badge&logo=microsoftpowerpoint&logoColor=white"></a>
 </p>
-<!-- Hero -->
-<div align="center">
 
 ---
 
 ## 🧩 About
 
 This repository contains my latest **CV** and **C++ portfolio slides**.  
-It showcases my engineering approach to **high-performance numerical software** in C++ (C++17/20), with emphasis on **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
+It showcases my engineering approach to **high-performance numerical software** in C++ (C++17/20), emphasizing **RAII**, **Eigen**, **OpenMP/MPI**, and clean **CMake** builds.
 
 ---
 
@@ -36,8 +34,6 @@ It showcases my engineering approach to **high-performance numerical software** 
 | `CV-MahdiTavakol-academic.pdf` | Academic CV |
 | `C++-Overview.pptx` | Portfolio slides (editable PowerPoint) |
 | `C++-Overview.pdf` | Portfolio slides (quick view, PDF) |
-
-> .
 
 ---
 
@@ -54,58 +50,14 @@ It showcases my engineering approach to **high-performance numerical software** 
 
 ## 🗂 Featured Repositories
 
-<div align="center">
+| Repository | Description |
+|-------------|-------------|
+| [🌀 **ModernCppProjects**](https://github.com/MahdiTavakol/ModernCppProjects) | A collection of focused C++ projects demonstrating **architecture**, **parallelism**, and **performance** (e.g., Mandelbrot renderer). |
+| [🧪 **LAMMPS-Constant-pH**](https://github.com/MahdiTavakol/LAMMPS-Constant-pH) | C++ extensions for **constant-pH MD** with strong emphasis on numerical algorithms and HPC integration. |
+| [⛰️ **MetaDynamics / TI**](https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025) | Adaptive biasing and thermodynamic integration, highlighting correctness and stability. |
+| [🧠 **NeuralNetwork (C++)**](https://github.com/MahdiTavakol/ModernCppProjects) | Eigen-powered neural network framework showing **RAII**, **batching**, and **OpenMP/MPI** parallelism. |
 
-<table>
-<tr>
-<td width="48%">
-
-### 🌀 ModernCppProjects
-A collection of focused C++ projects demonstrating **architecture**, **parallelism**, and **performance** (e.g., **Mandelbrot** renderer with allocation/layout strategies).
-<br/><br/>
-<a href="https://github.com/MahdiTavakol/ModernCppProjects">
-  <img src="https://img.shields.io/badge/Open-ModernCppProjects-0EA5E9?style=for-the-badge&logo=github" />
-</a>
-
-</td>
-<td width="48%">
-
-### 🧪 LAMMPS-Constant-pH
-C++ extensions for **constant-pH MD**; numerical algorithms, state transitions, and robust HPC integration.
-<br/><br/>
-<a href="https://github.com/MahdiTavakol/LAMMPS-Constant-pH">
-  <img src="https://img.shields.io/badge/Open-LAMMPS--Constant--pH-22C55E?style=for-the-badge&logo=github" />
-</a>
-
-</td>
-</tr>
-<tr>
-<td>
-
-### ⛰️ MetaDynamics / Thermodynamic Integration
-Adaptive biasing (MetaD) and **TI** implementations, emphasizing correctness, stability, and clean design.
-<br/><br/>
-<a href="https://github.com/MahdiTavakol/lammps-metaAR-10Sep2025">
-  <img src="https://img.shields.io/badge/Open-MetaDynamics%20%26%20TI-6366F1?style=for-the-badge&logo=github" />
-</a>
-
-</td>
-<td>
-
-### 🧠 NeuralNetwork (C++)
-Eigen-powered feed-forward framework demonstrating **RAII**, **batching**, and **OpenMP/MPI** accelerators behind a stable interface.
-<br/><br/>
-<a href="https://github.com/MahdiTavakol/ModernCppProjects">
-  <img src="https://img.shields.io/badge/Open-NeuralNetwork%20C%2B%2B-EC4899?style=for-the-badge&logo=github" />
-</a>
-
-</td>
-</tr>
-</table>
-
-</div>
-
-
+---
 
 ## 🛠️ Toolchain & Skills
 
@@ -123,7 +75,7 @@ cmake --build build -j
 # Example: Debug build with symbols
 cmake -S . -B build-debug -DCMAKE_BUILD_TYPE=Debug
 cmake --build build-debug -j
-```
+
 
 
 ---
