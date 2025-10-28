@@ -142,10 +142,10 @@ cmake --build build-debug -j
 
 **Mahdi Tavakol**  
 _Postdoctoral Researcher • Computational Scientist_  
-📧 **mahdi.tavakol@eng.ox.ac.uk**
+📧 **mahditavakol90@gmail.com**
 
 I’m keen to bring my **modern C++ engineering** and **numerical simulation** experience  
-to **GNC**, **robotics**, and **scientific software** development roles.
+to **software** development roles.
 
 ---
 
