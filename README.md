@@ -187,9 +187,7 @@
         <a href="C++-Overview.pdf" class="badge-img"><img alt="Portfolio Slides" src="https://img.shields.io/badge/Portfolio%20Slides-7C3AED?style=flat&logo=googledrive&logoColor=white" /></a>
         <a href="C++-Overview.pptx" class="badge-img"><img alt="PowerPoint" src="https://img.shields.io/badge/PowerPoint-9333EA?style=flat&logo=microsoftpowerpoint&logoColor=white" /></a>
       </div>
-      <div class="mono" style="margin-top:8px;">
-       
-      </div>
+
     </section>
 
     <!-- CONTACT -->
