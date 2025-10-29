@@ -139,12 +139,18 @@
 <!-- ===== HERO (Google Drive with auto-fallback to preview iframe) ===== -->
 <section class="hero" id="home" aria-label="hero">
   <div class="media-layer">
-    <!-- Primary: try raw <video> via Drive "uc" links -->
-    <video id="bgvid" autoplay muted loop playsinline
-           poster="https://drive.google.com/uc?export=download&id=DRIVE_ID_POSTER">
-      <source src="https://drive.google.com/uc?export=download&id=DRIVE_ID_WEBM" type="video/webm">
-      <source src="https://drive.google.com/uc?export=download&id=DRIVE_ID_MP4" type="video/mp4">
-    </video>
+    <div style="position:relative; width:100%; height:100%; overflow:hidden;">
+      <iframe
+        src="https://player.vimeo.com/video/1131788634?autoplay=1&muted=1&loop=1&background=1"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
+        allow="autoplay; fullscreen; picture-in-picture"
+        referrerpolicy="strict-origin-when-cross-origin"
+        title="invideo-ai-1080 The Lead Dev: C_C++ Duo in 65 Seconds"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</section>
 
     <!-- Fallback container: Drive preview iframe (hidden initially) -->
     <iframe id="drivePreview" style="display:none"
